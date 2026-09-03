@@ -103,6 +103,21 @@ button{
     margin-top:0;
 }
 
+.order-status{
+    width:100%;
+    padding:11px;
+    margin:8px 0 10px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    background:white;
+    font-size:15px;
+}
+
+.status-label{
+    font-weight:bold;
+    margin-top:10px;
+}
+
 .empty{
     text-align:center;
     color:#777;
@@ -118,6 +133,26 @@ footer{
 
 footer p{
     margin:5px;
+}
+
+@media(max-width:600px){
+
+    .container{
+        padding:10px;
+        margin:10px auto;
+    }
+
+    .box{
+        padding:14px;
+    }
+
+    nav a{
+        font-size:14px;
+    }
+
+    button{
+        padding:9px 11px;
+    }
 }
 </style>
 </head>
@@ -165,7 +200,7 @@ footer p{
 
 <div class="box">
 
-    <h2>📦 অর্ডার</h2>
+    <h2>📦 অর্ডার ব্যবস্থাপনা</h2>
 
     <div id="orders">
         <div class="empty">
@@ -283,12 +318,9 @@ function getProducts(){
 
 function loadProducts(){
 
-    const products =
-        getProducts();
+    const products = getProducts();
 
-    const box =
-        document.getElementById("products");
-
+    const box = document.getElementById("products");
 
     if(!products.length){
 
@@ -297,7 +329,6 @@ function loadProducts(){
 
         return;
     }
-
 
     box.innerHTML =
         products.map(function(product){
@@ -313,28 +344,24 @@ function loadProducts(){
 
                 <p>
                     💰 দাম:
-                    ৳${Number(product.price).toLocaleString()}
+                    ৳${Number(product.price || 0).toLocaleString("bn-BD")}
                 </p>
 
                 <p>
                     📦 স্টক:
-                    ${Number(product.stock)}
+                    ${Number(product.stock || 0)}
                 </p>
 
                 <button
                     class="edit"
                     onclick="editProduct(${product.id})">
-
                     ✏️ Edit
-
                 </button>
 
                 <button
                     class="delete"
                     onclick="deleteProduct(${product.id})">
-
                     🗑️ Delete
-
                 </button>
 
             </div>
@@ -359,14 +386,12 @@ function addProduct(){
         return;
     }
 
-
     const price =
         prompt("পণ্যের দাম লিখুন:");
 
     if(price === null){
         return;
     }
-
 
     const stock =
         prompt("স্টক সংখ্যা লিখুন:");
@@ -375,17 +400,14 @@ function addProduct(){
         return;
     }
 
-
     const icon =
         prompt(
             "পণ্যের Emoji দিন:",
             "🛍️"
         ) || "🛍️";
 
-
     const products =
         getProducts();
-
 
     products.push({
 
@@ -401,18 +423,14 @@ function addProduct(){
 
     });
 
-
     localStorage.setItem(
         "noonProducts",
         JSON.stringify(products)
     );
 
-
     loadProducts();
 
-
     alert("✅ পণ্য যোগ হয়েছে।");
-
 }
 
 
@@ -425,14 +443,12 @@ function editProduct(id){
     const products =
         getProducts();
 
-
     const product =
         products.find(function(item){
 
             return Number(item.id) === Number(id);
 
         });
-
 
     if(!product){
 
@@ -441,18 +457,15 @@ function editProduct(id){
         return;
     }
 
-
     const name =
         prompt(
             "পণ্যের নাম:",
             product.name
         );
 
-
     if(name === null){
         return;
     }
-
 
     const price =
         prompt(
@@ -460,11 +473,9 @@ function editProduct(id){
             product.price
         );
 
-
     if(price === null){
         return;
     }
-
 
     const stock =
         prompt(
@@ -472,11 +483,9 @@ function editProduct(id){
             product.stock
         );
 
-
     if(stock === null){
         return;
     }
-
 
     product.name =
         name.trim();
@@ -487,18 +496,14 @@ function editProduct(id){
     product.stock =
         Number(stock) || 0;
 
-
     localStorage.setItem(
         "noonProducts",
         JSON.stringify(products)
     );
 
-
     loadProducts();
 
-
     alert("✅ পণ্য আপডেট হয়েছে।");
-
 }
 
 
@@ -513,15 +518,12 @@ function deleteProduct(id){
             "এই পণ্যটি মুছে ফেলবেন?"
         );
 
-
     if(!ok){
         return;
     }
 
-
     let products =
         getProducts();
-
 
     products =
         products.filter(function(product){
@@ -531,18 +533,14 @@ function deleteProduct(id){
 
         });
 
-
     localStorage.setItem(
         "noonProducts",
         JSON.stringify(products)
     );
 
-
     loadProducts();
 
-
     alert("✅ পণ্য মুছে ফেলা হয়েছে।");
-
 }
 
 
@@ -578,6 +576,31 @@ function getOrders(){
 
 
 /* ==========================================
+   SAVE ORDERS
+========================================== */
+
+function saveOrders(orders){
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+}
+
+
+/* ==========================================
+   ORDER STATUS
+========================================== */
+
+function getStatus(order){
+
+    return order.status || "Pending";
+
+}
+
+
+/* ==========================================
    LOAD ORDERS
 ========================================== */
 
@@ -586,10 +609,8 @@ function loadOrders(){
     const orders =
         getOrders();
 
-
     const box =
         document.getElementById("orders");
-
 
     if(!orders.length){
 
@@ -598,7 +619,6 @@ function loadOrders(){
 
         return;
     }
-
 
     box.innerHTML =
         orders.map(function(order,index){
@@ -618,7 +638,7 @@ function loadOrders(){
 
                 <p>
                     💰 মূল্য:
-                    ৳${escapeText(order.price || "0")}
+                    ৳${escapeText(order.price || order.total || "0")}
                 </p>
 
                 <p>
@@ -628,7 +648,7 @@ function loadOrders(){
 
                 <p>
                     📞 মোবাইল:
-                    ${escapeText(order.phone || "—")}
+                    ${escapeText(order.phone || order.mobile || "—")}
                 </p>
 
                 <p>
@@ -643,8 +663,54 @@ function loadOrders(){
 
                 <p>
                     📅 সময়:
-                    ${escapeText(order.date || "—")}
+                    ${escapeText(order.date || order.time || "—")}
                 </p>
+
+                <p class="status-label">
+                    📌 অর্ডার স্ট্যাটাস
+                </p>
+
+                <select
+                    class="order-status"
+                    onchange="changeOrderStatus(${index}, this.value)">
+
+                    <option
+                        value="Pending"
+                        ${getStatus(order)==="Pending" ? "selected" : ""}>
+                        🟡 Pending
+                    </option>
+
+                    <option
+                        value="Confirmed"
+                        ${getStatus(order)==="Confirmed" ? "selected" : ""}>
+                        🟢 Confirmed
+                    </option>
+
+                    <option
+                        value="Delivered"
+                        ${getStatus(order)==="Delivered" ? "selected" : ""}>
+                        🚚 Delivered
+                    </option>
+
+                    <option
+                        value="Cancelled"
+                        ${getStatus(order)==="Cancelled" ? "selected" : ""}>
+                        🔴 Cancelled
+                    </option>
+
+                </select>
+
+                <button
+                    class="edit"
+                    onclick="editOrder(${index})">
+                    ✏️ Edit
+                </button>
+
+                <button
+                    class="delete"
+                    onclick="deleteOrder(${index})">
+                    🗑️ Delete
+                </button>
 
             </div>
 
@@ -652,6 +718,139 @@ function loadOrders(){
 
         }).join("");
 
+}
+
+
+/* ==========================================
+   CHANGE ORDER STATUS
+========================================== */
+
+function changeOrderStatus(index,status){
+
+    const orders =
+        getOrders();
+
+    if(!orders[index]){
+        return;
+    }
+
+    orders[index].status =
+        status;
+
+    saveOrders(orders);
+
+    loadOrders();
+
+    alert(
+        "✅ অর্ডারের স্ট্যাটাস পরিবর্তন হয়েছে।"
+    );
+}
+
+
+/* ==========================================
+   EDIT ORDER
+========================================== */
+
+function editOrder(index){
+
+    const orders =
+        getOrders();
+
+    const order =
+        orders[index];
+
+    if(!order){
+
+        alert("❌ অর্ডার পাওয়া যায়নি।");
+
+        return;
+    }
+
+
+    const name =
+        prompt(
+            "👤 কাস্টমারের নাম:",
+            order.name || ""
+        );
+
+    if(name === null){
+        return;
+    }
+
+
+    const phone =
+        prompt(
+            "📞 মোবাইল নম্বর:",
+            order.phone || order.mobile || ""
+        );
+
+    if(phone === null){
+        return;
+    }
+
+
+    const address =
+        prompt(
+            "📍 ঠিকানা:",
+            order.address || ""
+        );
+
+    if(address === null){
+        return;
+    }
+
+
+    order.name =
+        name.trim();
+
+    order.phone =
+        phone.trim();
+
+    order.address =
+        address.trim();
+
+
+    saveOrders(orders);
+
+    loadOrders();
+
+    alert("✅ অর্ডার আপডেট হয়েছে।");
+}
+
+
+/* ==========================================
+   DELETE ORDER
+========================================== */
+
+function deleteOrder(index){
+
+    const ok =
+        confirm(
+            "⚠️ এই অর্ডারটি স্থায়ীভাবে মুছে ফেলবেন?"
+        );
+
+    if(!ok){
+        return;
+    }
+
+
+    const orders =
+        getOrders();
+
+
+    orders.splice(
+        index,
+        1
+    );
+
+
+    saveOrders(orders);
+
+    loadOrders();
+
+    alert(
+        "✅ অর্ডার মুছে ফেলা হয়েছে।"
+    );
 }
 
 
@@ -695,10 +894,8 @@ function loadMessages(){
     const messages =
         getMessages();
 
-
     const box =
         document.getElementById("messages");
-
 
     if(!messages.length){
 
@@ -707,7 +904,6 @@ function loadMessages(){
 
         return;
     }
-
 
     box.innerHTML =
         messages
@@ -721,22 +917,30 @@ function loadMessages(){
 
                 <h3>
                     👤
-                    ${escapeText(message.name || "নাম নেই")}
+                    ${escapeText(
+                        message.name || "নাম নেই"
+                    )}
                 </h3>
 
                 <p>
                     📞
-                    ${escapeText(message.phone || "—")}
+                    ${escapeText(
+                        message.phone || "—"
+                    )}
                 </p>
 
                 <p>
                     💬
-                    ${escapeText(message.message || "—")}
+                    ${escapeText(
+                        message.message || "—"
+                    )}
                 </p>
 
                 <p>
                     📅
-                    ${escapeText(message.date || "—")}
+                    ${escapeText(
+                        message.date || "—"
+                    )}
                 </p>
 
             </div>
