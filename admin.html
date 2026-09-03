@@ -1,1 +1,350 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOON.BD Admin Panel</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f5f7fb;color:#222}
+header{background:#111827;color:white;text-align:center;padding:25px 15px}
+header h1{margin:0 0 6px}
+nav{background:white;padding:10px;text-align:center;box-shadow:0 2px 8px #ddd}
+nav a{display:inline-block;padding:9px 12px;margin:3px;text-decoration:none;color:#111827;font-weight:bold;border-radius:7px}
+nav a:hover{background:#111827;color:white}
+.container{max-width:1100px;margin:25px auto;padding:15px}
+.box{background:white;padding:20px;margin-bottom:20px;border-radius:12px;box-shadow:0 3px 12px #ddd}
+button{border:0;border-radius:7px;padding:10px 15px;margin:4px;cursor:pointer;font-weight:bold}
+.add{background:#111827;color:white}.edit{background:#2563eb;color:white}.delete{background:#dc2626;color:white}
+.refresh{background:#0f766e;color:white}
+.product,.order,.message{background:#fafafa;border:1px solid #ddd;border-radius:10px;padding:15px;margin:12px 0}
+.product h3,.order h3,.message h3{margin-top:0}
+.order-status{width:100%;padding:11px;margin:8px 0 10px;border:1px solid #ccc;border-radius:7px;background:white;font-size:15px}
+.status-label{font-weight:bold;margin-top:10px}
+.empty{text-align:center;color:#777;padding:25px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.stat{padding:20px;border-radius:10px;text-align:center}
+.stat h3{margin:0 0 10px;font-size:16px}
+.stat-number{font-size:30px;font-weight:bold}
+footer{background:#111827;color:white;text-align:center;padding:25px}
+footer p{margin:5px}
+@media(max-width:600px){.container{padding:10px;margin:10px auto}.box{padding:14px}nav a{font-size:14px}button{padding:9px 11px}}
+</style>
+</head>
+<body>
 
+<header>
+<h1>🔐 NOON.BD</h1>
+<p>Admin Dashboard</p>
+</header>
+
+<nav>
+<a href="index.html">🏠 হোম</a>
+<a href="services.html">🛠️ সেবা</a>
+<a href="products.html">🛍️ পণ্য</a>
+<a href="orders.html">📦 অর্ডার</a>
+<a href="delivery.html">🚚 ডেলিভারি</a>
+<a href="contact.html">📞 যোগাযোগ</a>
+</nav>
+
+<div class="container">
+
+<!-- DASHBOARD -->
+<div class="box">
+<h2>📊 Dashboard</h2>
+<div class="stat-grid">
+
+<div class="stat" style="background:#eef2ff">
+<h3>🛍️ মোট পণ্য</h3>
+<div id="dashboardProducts" class="stat-number">0</div>
+</div>
+
+<div class="stat" style="background:#fff7ed">
+<h3>📦 মোট অর্ডার</h3>
+<div id="dashboardOrders" class="stat-number">0</div>
+</div>
+
+<div class="stat" style="background:#ecfdf5">
+<h3>🟢 Confirmed</h3>
+<div id="dashboardConfirmed" class="stat-number">0</div>
+</div>
+
+<div class="stat" style="background:#f0f9ff">
+<h3>🚚 Delivered</h3>
+<div id="dashboardDelivered" class="stat-number">0</div>
+</div>
+
+</div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="box">
+<h2>🛍️ পণ্য ব্যবস্থাপনা</h2>
+<button class="add" onclick="addProduct()">➕ নতুন পণ্য</button>
+<div id="products"><div class="empty">পণ্য লোড হচ্ছে...</div></div>
+</div>
+
+<!-- ORDERS -->
+<div class="box">
+<h2>📦 অর্ডার ব্যবস্থাপনা</h2>
+<button class="refresh" onclick="loadAll()">🔄 Refresh</button>
+<div id="orders"><div class="empty">অর্ডার লোড হচ্ছে...</div></div>
+</div>
+
+<!-- MESSAGES -->
+<div class="box">
+<h2>💬 মেসেজ</h2>
+<div id="messages"><div class="empty">মেসেজ লোড হচ্ছে...</div></div>
+</div>
+
+</div>
+
+<footer>
+<p><strong>NOON.BD</strong></p>
+<p>Admin Panel</p>
+<p>© 2026 NOON.BD</p>
+</footer>
+
+<script>
+const defaultProducts=[
+{id:1,name:"স্মার্টফোন",price:15000,stock:10,icon:"📱"},
+{id:2,name:"হেডফোন",price:1200,stock:15,icon:"🎧"},
+{id:3,name:"স্মার্ট ওয়াচ",price:2500,stock:8,icon:"⌚"}
+];
+
+function getProducts(){
+try{
+const data=localStorage.getItem("noonProducts");
+if(!data){
+localStorage.setItem("noonProducts",JSON.stringify(defaultProducts));
+return defaultProducts;
+}
+const products=JSON.parse(data);
+return Array.isArray(products)?products:[];
+}catch(e){return []}
+}
+
+function saveProducts(products){
+localStorage.setItem("noonProducts",JSON.stringify(products));
+}
+
+function loadProducts(){
+const products=getProducts();
+const box=document.getElementById("products");
+if(!products.length){
+box.innerHTML='<div class="empty">কোনো পণ্য নেই।</div>';
+return;
+}
+box.innerHTML=products.map(p=>`
+<div class="product">
+<h3>${p.icon||"🛍️"} ${escapeText(p.name)}</h3>
+<p>💰 দাম: ৳${Number(p.price||0).toLocaleString("bn-BD")}</p>
+<p>📦 স্টক: ${Number(p.stock||0)}</p>
+<button class="edit" onclick="editProduct(${p.id})">✏️ Edit</button>
+<button class="delete" onclick="deleteProduct(${p.id})">🗑️ Delete</button>
+</div>`).join("");
+}
+
+function addProduct(){
+const name=prompt("পণ্যের নাম লিখুন:");
+if(name===null||!name.trim())return;
+const price=prompt("পণ্যের দাম লিখুন:","0");
+if(price===null)return;
+const stock=prompt("স্টক সংখ্যা লিখুন:","0");
+if(stock===null)return;
+const icon=prompt("পণ্যের Emoji দিন:","🛍️")||"🛍️";
+const products=getProducts();
+products.push({id:Date.now(),name:name.trim(),price:Number(price)||0,stock:Number(stock)||0,icon});
+saveProducts(products);
+loadAll();
+alert("✅ পণ্য যোগ হয়েছে।");
+}
+
+function editProduct(id){
+const products=getProducts();
+const product=products.find(p=>Number(p.id)===Number(id));
+if(!product){alert("❌ পণ্য পাওয়া যায়নি।");return}
+const name=prompt("পণ্যের নাম:",product.name);
+if(name===null)return;
+const price=prompt("পণ্যের দাম:",product.price);
+if(price===null)return;
+const stock=prompt("স্টক:",product.stock);
+if(stock===null)return;
+const icon=prompt("Emoji:",product.icon||"🛍️");
+product.name=name.trim();
+product.price=Number(price)||0;
+product.stock=Number(stock)||0;
+if(icon!==null)product.icon=icon||"🛍️";
+saveProducts(products);
+loadAll();
+alert("✅ পণ্য আপডেট হয়েছে।");
+}
+
+function deleteProduct(id){
+if(!confirm("এই পণ্যটি মুছে ফেলবেন?"))return;
+const products=getProducts().filter(p=>Number(p.id)!==Number(id));
+saveProducts(products);
+loadAll();
+alert("✅ পণ্য মুছে ফেলা হয়েছে।");
+}
+
+/* IMPORTANT: orders.html saves orders in noonOrders */
+function getOrders(){
+try{
+const data=localStorage.getItem("noonOrders");
+if(!data)return [];
+const orders=JSON.parse(data);
+return Array.isArray(orders)?orders:[];
+}catch(e){return []}
+}
+
+function saveOrders(orders){
+localStorage.setItem("noonOrders",JSON.stringify(orders));
+}
+
+function getStatus(order){return order.status||"Pending"}
+
+function orderItemsText(order){
+if(Array.isArray(order.items)){
+return order.items.map(i=>`${escapeText(i.name||"—")} × ${Number(i.quantity||1)}`).join("<br>");
+}
+return escapeText(order.product||"—");
+}
+
+function loadOrders(){
+const orders=getOrders();
+const box=document.getElementById("orders");
+if(!orders.length){
+box.innerHTML='<div class="empty">📦 এখনো কোনো অর্ডার নেই।</div>';
+return;
+}
+
+box.innerHTML=orders.map((order,index)=>`
+<div class="order">
+<h3>📦 ${escapeText(order.id||("অর্ডার #"+(index+1)))}</h3>
+
+<p>🛍️ <strong>পণ্য:</strong><br>${orderItemsText(order)}</p>
+
+<p>💰 <strong>পণ্যের মোট:</strong> ৳${Number(order.productTotal||order.total||0).toLocaleString("bn-BD")}</p>
+
+<p>🚚 <strong>ডেলিভারি চার্জ:</strong> ৳${Number(order.deliveryCharge||150).toLocaleString("bn-BD")}</p>
+
+<p>💰 <strong>সর্বমোট:</strong> ৳${Number(order.total||0).toLocaleString("bn-BD")}</p>
+
+<p>👤 <strong>নাম:</strong> ${escapeText(order.name||"—")}</p>
+<p>📞 <strong>মোবাইল:</strong> ${escapeText(order.phone||order.mobile||"—")}</p>
+<p>📍 <strong>ঠিকানা:</strong> ${escapeText(order.address||"—")}</p>
+<p>💳 <strong>পেমেন্ট:</strong> ${escapeText(order.paymentMethod||order.payment||"—")}</p>
+<p>📱 <strong>পেমেন্ট নম্বর:</strong> ${escapeText(order.paymentNumber||"—")}</p>
+<p>🧾 <strong>Transaction ID:</strong> ${escapeText(order.transactionId||"—")}</p>
+<p>📅 <strong>সময়:</strong> ${escapeText(order.date||order.time||"—")}</p>
+
+<p class="status-label">📌 অর্ডার স্ট্যাটাস</p>
+
+<select class="order-status" onchange="changeOrderStatus(${index},this.value)">
+<option value="Pending" ${getStatus(order)==="Pending"?"selected":""}>🟡 Pending</option>
+<option value="Confirmed" ${getStatus(order)==="Confirmed"?"selected":""}>🟢 Confirmed</option>
+<option value="Delivered" ${getStatus(order)==="Delivered"?"selected":""}>🚚 Delivered</option>
+<option value="Cancelled" ${getStatus(order)==="Cancelled"?"selected":""}>🔴 Cancelled</option>
+</select>
+
+<button class="edit" onclick="editOrder(${index})">✏️ Edit</button>
+<button class="delete" onclick="deleteOrder(${index})">🗑️ Delete</button>
+</div>
+`).join("");
+}
+
+function changeOrderStatus(index,status){
+const orders=getOrders();
+if(!orders[index])return;
+orders[index].status=status;
+saveOrders(orders);
+loadAll();
+}
+
+function editOrder(index){
+const orders=getOrders();
+const order=orders[index];
+if(!order){alert("❌ অর্ডার পাওয়া যায়নি।");return}
+
+const name=prompt("👤 কাস্টমারের নাম:",order.name||"");
+if(name===null)return;
+const phone=prompt("📞 মোবাইল নম্বর:",order.phone||order.mobile||"");
+if(phone===null)return;
+const address=prompt("📍 ঠিকানা:",order.address||"");
+if(address===null)return;
+
+order.name=name.trim();
+order.phone=phone.trim();
+order.address=address.trim();
+saveOrders(orders);
+loadAll();
+alert("✅ অর্ডার আপডেট হয়েছে।");
+}
+
+function deleteOrder(index){
+if(!confirm("⚠️ এই অর্ডারটি স্থায়ীভাবে মুছে ফেলবেন?"))return;
+const orders=getOrders();
+orders.splice(index,1);
+saveOrders(orders);
+loadAll();
+alert("✅ অর্ডার মুছে ফেলা হয়েছে।");
+}
+
+function getMessages(){
+try{
+const data=localStorage.getItem("messages");
+if(!data)return [];
+const messages=JSON.parse(data);
+return Array.isArray(messages)?messages:[];
+}catch(e){return []}
+}
+
+function loadMessages(){
+const messages=getMessages();
+const box=document.getElementById("messages");
+if(!messages.length){
+box.innerHTML='<div class="empty">💬 কোনো মেসেজ নেই।</div>';
+return;
+}
+box.innerHTML=messages.slice().reverse().map(m=>`
+<div class="message">
+<h3>👤 ${escapeText(m.name||"নাম নেই")}</h3>
+<p>📞 ${escapeText(m.phone||"—")}</p>
+<p>💬 ${escapeText(m.message||"—")}</p>
+<p>📅 ${escapeText(m.date||"—")}</p>
+</div>`).join("");
+}
+
+function loadDashboard(){
+const products=getProducts();
+const orders=getOrders();
+
+document.getElementById("dashboardProducts").innerText=products.length;
+document.getElementById("dashboardOrders").innerText=orders.length;
+document.getElementById("dashboardConfirmed").innerText=
+orders.filter(o=>getStatus(o)==="Confirmed").length;
+document.getElementById("dashboardDelivered").innerText=
+orders.filter(o=>getStatus(o)==="Delivered").length;
+}
+
+function loadAll(){
+loadDashboard();
+loadProducts();
+loadOrders();
+loadMessages();
+}
+
+function escapeText(value){
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+document.addEventListener("DOMContentLoaded",loadAll);
+</script>
+</body>
+</html>
