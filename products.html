@@ -1,22 +1,534 @@
 <!DOCTYPE html>
 <html lang="bn">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>NOON.BD — পণ্য</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOON.BD — অর্ডার</title>
+
 <style>
-body{font-family:Arial;margin:0;background:#f5f7fa}header{background:#111827;color:white;padding:18px;text-align:center}nav{text-align:center;background:white;padding:14px}nav a{margin:8px;color:#111827;text-decoration:none;font-weight:bold}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:30px}.card{background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 2px 10px #ddd}.card button{background:#111827;color:white;border:0;padding:10px 18px;border-radius:7px}
-</style></head>
-<body>
-<header><h1>NOON.BD</h1><p>পণ্যসমূহ</p></header>
-<nav><a href="index.html">হোম</a><a href="services.html">সেবা</a><a href="products.html">পণ্য</a><a href="orders.html">অর্ডার</a><a href="delivery.html">ডেলিভারি</a><a href="contact.html">যোগাযোগ</a><a href="admin.html">অ্যাডমিন</a></nav>
-<div class="grid">
-<div class="card"><h3>পণ্য ১</h3><p>মূল্য: ৳500</p><button onclick="order('পণ্য ১',500)">অর্ডার করুন</button></div>
-<div class="card"><h3>পণ্য ২</h3><p>মূল্য: ৳800</p><button onclick="order('পণ্য ২',800)">অর্ডার করুন</button></div>
-<div class="card"><h3>পণ্য ৩</h3><p>মূল্য: ৳1200</p><button onclick="order('পণ্য ৩',1200)">অর্ডার করুন</button></div>
-</div>
-<script>
-function order(name,price){
-localStorage.setItem("selectedProduct",name);
-localStorage.setItem("selectedPrice",price);
-location.href="orders.html";
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
+
+body{
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+/* Header */
+header{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:18px 15px;
+}
+
+header h1{
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+header p{
+    font-size:14px;
+}
+
+/* Navigation */
+nav{
+    background:white;
+    padding:12px 8px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    text-decoration:none;
+    color:#111827;
+    font-weight:bold;
+    padding:9px 12px;
+    border-radius:7px;
+    font-size:14px;
+}
+
+nav a:hover,
+nav a.active{
+    background:#111827;
+    color:white;
+}
+
+/* Page title */
+.page-title{
+    text-align:center;
+    padding:40px 20px 20px;
+}
+
+.page-title h2{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.page-title p{
+    color:#666;
+}
+
+/* Order container */
+.order-container{
+    max-width:650px;
+    margin:10px auto 50px;
+    padding:0 15px;
+}
+
+/* Product summary */
+.product-box{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    margin-bottom:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.product-box h3{
+    margin-bottom:10px;
+}
+
+.product-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+}
+
+.product-row:last-child{
+    border-bottom:0;
+}
+
+/* Form */
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.form-box h3{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:14px 0 7px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#111827;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.required{
+    color:#dc2626;
+}
+
+/* Submit button */
+.submit-btn{
+    width:100%;
+    margin-top:22px;
+    padding:14px;
+    border:0;
+    border-radius:9px;
+    background:#111827;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    background:#2563eb;
+}
+
+/* Success */
+.success{
+    display:none;
+    background:#ecfdf5;
+    border:1px solid #86efac;
+    color:#166534;
+    padding:25px;
+    border-radius:14px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.success h2{
+    margin-bottom:10px;
+}
+
+.success p{
+    line-height:1.7;
+}
+
+.home-btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:11px 20px;
+    background:#111827;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+/* Footer */
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+footer p{
+    margin:5px 0;
+    font-size:14px;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    nav{
+        justify-content:flex-start;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+    }
+
+    nav a{
+        white-space:nowrap;
+    }
+
+    .page-title h2{
+        font-size:27px;
+    }
+
+    .form-box{
+        padding:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+    <h1>NOON.BD</h1>
+    <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
+</header>
+
+<!-- Navigation -->
+<nav>
+    <a href="index.html">🏠 হোম</a>
+    <a href="services.html">🛠️ সেবা</a>
+    <a href="products.html">🛍️ পণ্য</a>
+    <a href="orders.html" class="active">📦 অর্ডার</a>
+    <a href="delivery.html">🚚 ডেলিভারি</a>
+    <a href="contact.html">📞 যোগাযোগ</a>
+    <a href="admin.html">🔐 অ্যাডমিন</a>
+</nav>
+
+<!-- Page title -->
+<section class="page-title">
+    <h2>📦 অর্ডার করুন</h2>
+    <p>নিচের ফর্মটি পূরণ করে আপনার অর্ডার নিশ্চিত করুন।</p>
+</section>
+
+<!-- Order -->
+<div class="order-container">
+
+    <!-- Success message -->
+    <div id="successBox" class="success">
+
+        <h2>✅ অর্ডার গ্রহণ করা হয়েছে!</h2>
+
+        <p>
+            আপনার অর্ডার সফলভাবে সংরক্ষণ করা হয়েছে।
+        </p>
+
+        <p>
+            আমাদের প্রতিনিধি প্রয়োজন হলে আপনার সাথে যোগাযোগ করবেন।
+        </p>
+
+        <a href="index.html" class="home-btn">
+            🏠 হোমে ফিরে যান
+        </a>
+
+    </div>
+
+
+    <!-- Selected product -->
+    <div class="product-box">
+
+        <h3>🛍️ নির্বাচিত পণ্য</h3>
+
+        <div class="product-row">
+            <span>পণ্য</span>
+            <strong id="productName">কোনো পণ্য নির্বাচন করা হয়নি</strong>
+        </div>
+
+        <div class="product-row">
+            <span>মূল্য</span>
+            <strong id="productPrice">৳ 0</strong>
+        </div>
+
+    </div>
+
+
+    <!-- Form -->
+    <div class="form-box">
+
+        <h3>📝 আপনার তথ্য</h3>
+
+        <form id="orderForm">
+
+            <label for="customerName">
+                নাম <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="আপনার পুরো নাম"
+                required
+            >
+
+
+            <label for="phone">
+                মোবাইল নম্বর <span class="required">*</span>
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="01XXXXXXXXX"
+                maxlength="11"
+                required
+            >
+
+
+            <label for="address">
+                সম্পূর্ণ ঠিকানা <span class="required">*</span>
+            </label>
+
+            <textarea
+                id="address"
+                placeholder="বাড়ি/রোড, এলাকা, থানা, জেলা লিখুন"
+                required
+            ></textarea>
+
+
+            <label for="payment">
+                পেমেন্ট পদ্ধতি
+            </label>
+
+            <select id="payment">
+
+                <option value="ক্যাশ অন ডেলিভারি">
+                    ক্যাশ অন ডেলিভারি
+                </option>
+
+                <option value="অন্যান্য">
+                    অন্যান্য
+                </option>
+
+            </select>
+
+
+            <button
+                type="submit"
+                class="submit-btn">
+                ✅ অর্ডার নিশ্চিত করুন
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- Footer -->
+<footer>
+
+    <p><strong>NOON.BD</strong></p>
+
+    <p>
+        আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম
+    </p>
+
+    <p>
+        © 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত
+    </p>
+
+</footer>
+
+
+<script>
+
+/* ================================
+   নির্বাচিত পণ্যের তথ্য
+================================ */
+
+const selectedProduct =
+    localStorage.getItem("selectedProduct") || "";
+
+const selectedPrice =
+    localStorage.getItem("selectedPrice") || "0";
+
+
+/* পণ্য দেখানো */
+
+if(selectedProduct){
+
+    document.getElementById("productName").textContent =
+        selectedProduct;
+
+    document.getElementById("productPrice").textContent =
+        "৳ " + Number(selectedPrice).toLocaleString("en-BD");
+
+}
+
+
+/* ================================
+   অর্ডার সাবমিট
+================================ */
+
+document.getElementById("orderForm").addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        const customerName =
+            document.getElementById("customerName").value.trim();
+
+        const phone =
+            document.getElementById("phone").value.trim();
+
+        const address =
+            document.getElementById("address").value.trim();
+
+        const payment =
+            document.getElementById("payment").value;
+
+
+        /* মোবাইল নম্বর যাচাই */
+
+        if(!/^01[3-9]\d{8}$/.test(phone)){
+
+            alert("সঠিক ১১ সংখ্যার বাংলাদেশি মোবাইল নম্বর দিন।");
+
+            return;
+        }
+
+
+        /* অর্ডার তৈরি */
+
+        const newOrder = {
+
+            id: Date.now(),
+
+            product: selectedProduct,
+
+            price: selectedPrice,
+
+            name: customerName,
+
+            phone: phone,
+
+            address: address,
+
+            payment: payment,
+
+            status: "নতুন",
+
+            date: new Date().toLocaleString("bn-BD")
+
+        };
+
+
+        /* পুরোনো অর্ডার নেওয়া */
+
+        let orders =
+            JSON.parse(
+                localStorage.getItem("orders") || "[]"
+            );
+
+
+        /* নতুন অর্ডার যোগ */
+
+        orders.push(newOrder);
+
+
+        /* সংরক্ষণ */
+
+        localStorage.setItem(
+            "orders",
+            JSON.stringify(orders)
+        );
+
+
+        /* সফল মেসেজ */
+
+        document.getElementById("successBox").style.display =
+            "block";
+
+
+        /* ফর্ম লুকানো */
+
+        document.querySelector(".form-box").style.display =
+            "none";
+
+
+        /* উপরে নিয়ে যাওয়া */
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+);
+
 </script>
-</body></html>
+
+</body>
+</html>
