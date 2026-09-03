@@ -1,16 +1,615 @@
 <!DOCTYPE html>
 <html lang="bn">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>NOON.BD — যোগাযোগ</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOON.BD — যোগাযোগ</title>
+
 <style>
-body{font-family:Arial;margin:0;background:#f5f7fa}header{background:#111827;color:white;padding:18px;text-align:center}nav{text-align:center;background:white;padding:14px}nav a{margin:8px;color:#111827;text-decoration:none;font-weight:bold}.box{max-width:600px;margin:30px auto;background:white;padding:25px;border-radius:12px;box-shadow:0 2px 10px #ddd}
-</style></head>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+/* Header */
+header{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:18px 15px;
+}
+
+header h1{
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+header p{
+    font-size:14px;
+}
+
+/* Navigation */
+nav{
+    background:white;
+    padding:12px 8px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav a{
+    text-decoration:none;
+    color:#111827;
+    font-weight:bold;
+    padding:9px 12px;
+    border-radius:7px;
+    font-size:14px;
+}
+
+nav a:hover,
+nav a.active{
+    background:#111827;
+    color:white;
+}
+
+/* Page title */
+.page-title{
+    text-align:center;
+    padding:42px 20px 25px;
+}
+
+.page-title h2{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.page-title p{
+    color:#666;
+    line-height:1.7;
+}
+
+/* Main */
+.contact-container{
+    max-width:1000px;
+    margin:10px auto 50px;
+    padding:0 20px;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+/* Contact info */
+.info-box,
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.info-box h3,
+.form-box h3{
+    margin-bottom:20px;
+    font-size:21px;
+}
+
+.contact-item{
+    display:flex;
+    gap:15px;
+    padding:16px 0;
+    border-bottom:1px solid #eee;
+}
+
+.contact-item:last-child{
+    border-bottom:0;
+}
+
+.contact-icon{
+    font-size:28px;
+    width:40px;
+    text-align:center;
+}
+
+.contact-item h4{
+    margin-bottom:5px;
+}
+
+.contact-item p{
+    color:#666;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* Form */
+label{
+    display:block;
+    font-weight:bold;
+    margin:13px 0 7px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#111827;
+}
+
+textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+.send-btn{
+    width:100%;
+    margin-top:20px;
+    padding:13px;
+    border:0;
+    border-radius:8px;
+    background:#111827;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.send-btn:hover{
+    background:#2563eb;
+}
+
+/* Success message */
+.success{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    background:#ecfdf5;
+    color:#166534;
+    border:1px solid #86efac;
+    border-radius:8px;
+    line-height:1.6;
+}
+
+/* FAQ */
+.faq{
+    margin-top:25px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.faq h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.faq-item{
+    border-bottom:1px solid #eee;
+    padding:15px 0;
+}
+
+.faq-item:last-child{
+    border-bottom:0;
+}
+
+.faq-item h3{
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.faq-item p{
+    color:#666;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* Footer */
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+footer p{
+    margin:5px 0;
+    font-size:14px;
+}
+
+/* Mobile */
+@media(max-width:700px){
+
+    header h1{
+        font-size:25px;
+    }
+
+    nav{
+        justify-content:flex-start;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+    }
+
+    nav a{
+        white-space:nowrap;
+    }
+
+    .page-title{
+        padding-top:35px;
+    }
+
+    .page-title h2{
+        font-size:27px;
+    }
+
+    .contact-container{
+        padding:0 15px;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
 <body>
-<header><h1>NOON.BD</h1><p>যোগাযোগ করুন</p></header>
-<nav><a href="index.html">হোম</a><a href="services.html">সেবা</a><a href="products.html">পণ্য</a><a href="orders.html">অর্ডার</a><a href="delivery.html">ডেলিভারি</a><a href="contact.html">যোগাযোগ</a><a href="admin.html">অ্যাডমিন</a></nav>
-<div class="box">
-<h2>যোগাযোগ</h2>
-<p>📞 মোবাইল: আপনার নম্বর দিন</p>
-<p>📧 ইমেইল: আপনার ইমেইল দিন</p>
-<p>📍 ঠিকানা: আপনার ঠিকানা দিন</p>
-</div>
-</body></html>
+
+<!-- Header -->
+<header>
+    <h1>NOON.BD</h1>
+    <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
+</header>
+
+
+<!-- Navigation -->
+<nav>
+
+    <a href="index.html">🏠 হোম</a>
+
+    <a href="services.html">🛠️ সেবা</a>
+
+    <a href="products.html">🛍️ পণ্য</a>
+
+    <a href="orders.html">📦 অর্ডার</a>
+
+    <a href="delivery.html">🚚 ডেলিভারি</a>
+
+    <a href="contact.html" class="active">📞 যোগাযোগ</a>
+
+    <a href="admin.html">🔐 অ্যাডমিন</a>
+
+</nav>
+
+
+<!-- Page Title -->
+<section class="page-title">
+
+    <h2>📞 আমাদের সাথে যোগাযোগ</h2>
+
+    <p>
+        কোনো প্রশ্ন বা প্রয়োজন হলে নিচের তথ্য ব্যবহার করে
+        আমাদের সাথে যোগাযোগ করুন।
+    </p>
+
+</section>
+
+
+<!-- Main -->
+<main class="contact-container">
+
+    <div class="contact-grid">
+
+
+        <!-- Contact Information -->
+        <section class="info-box">
+
+            <h3>📋 যোগাযোগের তথ্য</h3>
+
+
+            <div class="contact-item">
+
+                <div class="contact-icon">📞</div>
+
+                <div>
+
+                    <h4>মোবাইল</h4>
+
+                    <p>
+                        আপনার মোবাইল নম্বর এখানে দিন
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <div class="contact-icon">📧</div>
+
+                <div>
+
+                    <h4>ইমেইল</h4>
+
+                    <p>
+                        আপনার ইমেইল ঠিকানা এখানে দিন
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <div class="contact-icon">📍</div>
+
+                <div>
+
+                    <h4>ঠিকানা</h4>
+
+                    <p>
+                        আপনার ব্যবসার ঠিকানা এখানে দিন
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <div class="contact-icon">🕐</div>
+
+                <div>
+
+                    <h4>যোগাযোগের সময়</h4>
+
+                    <p>
+                        প্রতিদিন প্রয়োজন অনুযায়ী
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Contact Form -->
+        <section class="form-box">
+
+            <h3>✉️ মেসেজ পাঠান</h3>
+
+            <form id="contactForm">
+
+                <label for="name">
+                    আপনার নাম
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="আপনার নাম"
+                    required
+                >
+
+
+                <label for="phone">
+                    মোবাইল নম্বর
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="01XXXXXXXXX"
+                    required
+                >
+
+
+                <label for="message">
+                    আপনার মেসেজ
+                </label>
+
+                <textarea
+                    id="message"
+                    placeholder="আপনার মেসেজ লিখুন..."
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="send-btn">
+                    📨 মেসেজ পাঠান
+                </button>
+
+            </form>
+
+
+            <div id="successMessage" class="success">
+                ✅ আপনার মেসেজ গ্রহণ করা হয়েছে।
+                ধন্যবাদ!
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- FAQ -->
+    <section class="faq">
+
+        <h2>❓ সাধারণ প্রশ্ন</h2>
+
+
+        <div class="faq-item">
+
+            <h3>কীভাবে অর্ডার করব?</h3>
+
+            <p>
+                পণ্য পেজে গিয়ে আপনার পছন্দের পণ্য নির্বাচন
+                করে “অর্ডার করুন” বাটনে চাপুন।
+            </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <h3>অর্ডারের জন্য কী তথ্য লাগবে?</h3>
+
+            <p>
+                আপনার নাম, মোবাইল নম্বর এবং সম্পূর্ণ
+                ডেলিভারি ঠিকানা প্রয়োজন।
+            </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <h3>ডেলিভারি সম্পর্কে কোথায় জানতে পারব?</h3>
+
+            <p>
+                ডেলিভারি সংক্রান্ত তথ্যের জন্য
+                ডেলিভারি পেজটি দেখুন।
+            </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <h3>কীভাবে যোগাযোগ করব?</h3>
+
+            <p>
+                এই পেজের যোগাযোগের তথ্য ব্যবহার করুন
+                অথবা নিচের মেসেজ ফর্ম পূরণ করুন।
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Footer -->
+<footer>
+
+    <p><strong>NOON.BD</strong></p>
+
+    <p>
+        আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম
+    </p>
+
+    <p>
+        © 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত
+    </p>
+
+</footer>
+
+
+<script>
+
+/*
+    Contact Form
+*/
+
+document
+.getElementById("contactForm")
+.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const message =
+        document.getElementById("message").value.trim();
+
+
+    if(!name || !phone || !message){
+
+        alert("সব তথ্য পূরণ করুন।");
+
+        return;
+    }
+
+
+    /*
+       মেসেজ LocalStorage-এ সংরক্ষণ
+    */
+
+    const newMessage = {
+
+        id:Date.now(),
+
+        name:name,
+
+        phone:phone,
+
+        message:message,
+
+        date:new Date().toLocaleString("bn-BD")
+
+    };
+
+
+    let messages =
+        JSON.parse(
+            localStorage.getItem("messages") || "[]"
+        );
+
+
+    messages.push(newMessage);
+
+
+    localStorage.setItem(
+        "messages",
+        JSON.stringify(messages)
+    );
+
+
+    /* Success */
+
+    document.getElementById("successMessage")
+    .style.display="block";
+
+
+    document.getElementById("contactForm")
+    .reset();
+
+});
+
+</script>
+
+</body>
+</html>
