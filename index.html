@@ -3,36 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOON.BD</title>
+<title>NOON.BD - সেবা</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#222}
-header{background:#111827;color:white;padding:15px 20px;font-size:20px;font-weight:bold}
-.hero{background:white;margin:20px 0;padding:40px 20px;text-align:center;border-radius:14px}
-button{background:#111827;color:white;border:0;padding:13px 25px;border-radius:8px;font-size:16px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;padding:0 10px}
-.card{background:white;padding:20px;border-radius:14px}
-footer{text-align:center;color:#777;padding:40px}
-@media(max-width:700px){.cards{grid-template-columns:1fr}}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f7fa;
+  color:#222;
+}
+
+header{
+  background:#111827;
+  color:white;
+  padding:18px 20px;
+  font-size:23px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:25px 15px;
+}
+
+.welcome{
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.welcome h1{
+  margin-top:0;
+}
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.service{
+  background:white;
+  padding:22px;
+  border-radius:16px;
+  box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.service h2{
+  margin-top:0;
+}
+
+.service button{
+  background:#111827;
+  color:white;
+  border:0;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.home{
+  margin-top:25px;
+  background:#111827;
+  color:white;
+  border:0;
+  padding:13px 22px;
+  border-radius:9px;
+  font-size:16px;
+}
+
+@media(max-width:600px){
+  .services{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
+
 <body>
 
 <header>NOON.BD</header>
 
-<section class="hero">
-<h1>স্বাগতম NOON.BD-তে</h1>
-<p>আপনার অনলাইন প্ল্যাটফর্ম।</p>
-<button onclick="location.href='services.html'">শুরু করুন</button>
-</section>
+<div class="container">
 
-<section class="cards">
-<div class="card"><h2>সেবা</h2><p>আপনার প্রয়োজনীয় সেবা এখানে পাবেন।</p></div>
-<div class="card"><h2>পণ্য</h2><p>পণ্য ও অফার এখানে দেখতে পারবেন।</p></div>
-<div class="card"><h2>যোগাযোগ</h2><p>আপনার যোগাযোগের তথ্য এখানে দিন।</p></div>
-</section>
+  <div class="welcome">
+    <h1>NOON.BD সেবা</h1>
+    <p>আপনার প্রয়োজনীয় সেবা বেছে নিন।</p>
+  </div>
 
-<footer>© 2026 NOON.BD</footer>
+  <div class="services">
+
+    <div class="service">
+      <h2>🛒 পণ্য</h2>
+      <p>আমাদের বিভিন্ন পণ্য দেখুন।</p>
+      <button>দেখুন</button>
+    </div>
+
+    <div class="service">
+      <h2>📦 অর্ডার</h2>
+      <p>আপনার অর্ডারের তথ্য দেখুন।</p>
+      <button>দেখুন</button>
+    </div>
+
+    <div class="service">
+      <h2>🚚 ডেলিভারি</h2>
+      <p>ডেলিভারি সংক্রান্ত তথ্য জানুন।</p>
+      <button>দেখুন</button>
+    </div>
+
+    <div class="service">
+      <h2>☎️ যোগাযোগ</h2>
+      <p>আমাদের সাথে যোগাযোগ করুন।</p>
+      <button>যোগাযোগ</button>
+    </div>
+
+  </div>
+
+  <button class="home" onclick="location.href='index.html'">
+    ← হোমে ফিরে যান
+  </button>
+
+</div>
 
 </body>
 </html>
