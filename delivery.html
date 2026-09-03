@@ -4,482 +4,469 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NOON.BD — ডেলিভারি</title>
+<title>NOON.BD - Delivery</title>
 
 <style>
+
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
+    margin:0;
     font-family:Arial,"Noto Sans Bengali",sans-serif;
     background:#f5f7fb;
     color:#222;
 }
 
-/* Header */
 header{
     background:#111827;
     color:white;
     text-align:center;
-    padding:18px 15px;
+    padding:22px 15px;
 }
 
 header h1{
-    font-size:30px;
-    margin-bottom:5px;
+    margin:0 0 5px;
 }
 
-header p{
-    font-size:14px;
-}
-
-/* Navigation */
 nav{
-    background:white;
-    padding:12px 8px;
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:7px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-    position:sticky;
-    top:0;
-    z-index:10;
+    margin-top:15px;
 }
 
 nav a{
+    color:white;
     text-decoration:none;
-    color:#111827;
-    font-weight:bold;
-    padding:9px 12px;
-    border-radius:7px;
+    margin:0 6px;
     font-size:14px;
 }
 
-nav a:hover,
-nav a.active{
-    background:#111827;
-    color:white;
+.container{
+    max-width:900px;
+    margin:25px auto;
+    padding:15px;
 }
 
-/* Page title */
-.page-title{
-    text-align:center;
-    padding:45px 20px 25px;
-}
-
-.page-title h2{
-    font-size:30px;
-    margin-bottom:10px;
-}
-
-.page-title p{
-    color:#666;
-    line-height:1.6;
-}
-
-/* Main */
-.delivery-container{
-    max-width:1000px;
-    margin:10px auto 50px;
-    padding:0 20px;
-}
-
-/* Delivery cards */
-.delivery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+.box{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 3px 12px #ddd;
 }
 
 .delivery-card{
-    background:white;
-    padding:25px 20px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,.07);
-}
-
-.delivery-icon{
-    font-size:45px;
-    margin-bottom:15px;
+    background:#fafafa;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:16px;
+    margin:15px 0;
 }
 
 .delivery-card h3{
-    margin-bottom:10px;
+    margin-top:0;
 }
 
-.delivery-card p{
-    color:#666;
-    line-height:1.7;
-    font-size:15px;
-}
-
-/* Steps */
-.steps-box{
-    background:white;
-    margin-top:25px;
-    padding:28px 22px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,.07);
-}
-
-.steps-box h2{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.steps{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:15px;
-}
-
-.step{
-    text-align:center;
-    padding:18px;
-    background:#f8fafc;
-    border-radius:10px;
-}
-
-.number{
-    width:42px;
-    height:42px;
-    margin:0 auto 12px;
-    border-radius:50%;
-    background:#111827;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.status{
+    display:inline-block;
+    padding:7px 10px;
+    border-radius:6px;
+    background:#fff3cd;
+    margin:5px 0;
     font-weight:bold;
 }
 
-.step h3{
-    font-size:17px;
-    margin-bottom:8px;
+.info{
+    line-height:1.7;
 }
 
-.step p{
-    color:#666;
-    font-size:14px;
-    line-height:1.5;
-}
-
-/* Delivery area */
-.area-box{
-    background:white;
-    margin-top:25px;
-    padding:28px 22px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,.07);
+.empty{
     text-align:center;
+    color:#777;
+    padding:30px;
 }
 
-.area-box h2{
-    margin-bottom:12px;
-}
-
-.area-box p{
-    color:#666;
-    line-height:1.7;
-}
-
-/* Notice */
-.notice{
-    margin-top:25px;
-    background:#fff;
-    border-left:5px solid #111827;
-    padding:20px;
-    border-radius:8px;
-    box-shadow:0 3px 12px rgba(0,0,0,.06);
-}
-
-.notice h3{
-    margin-bottom:8px;
-}
-
-.notice p{
-    color:#666;
-    line-height:1.7;
-}
-
-/* Button */
-.btn{
+.back-btn{
     display:inline-block;
-    margin-top:18px;
-    padding:12px 22px;
     background:#111827;
     color:white;
     text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
+    padding:11px 18px;
+    border-radius:7px;
+    margin-top:10px;
 }
 
-/* Footer */
 footer{
+    margin-top:40px;
     background:#111827;
     color:white;
     text-align:center;
-    padding:25px 15px;
+    padding:25px;
 }
 
 footer p{
-    margin:5px 0;
-    font-size:14px;
+    margin:5px;
 }
 
-/* Mobile */
 @media(max-width:600px){
 
-    header h1{
-        font-size:25px;
+    .container{
+        padding:10px;
     }
 
-    nav{
-        justify-content:flex-start;
-        overflow-x:auto;
-        flex-wrap:nowrap;
+    .box{
+        padding:15px;
     }
 
     nav a{
-        white-space:nowrap;
+        display:inline-block;
+        margin:4px;
     }
 
-    .page-title{
-        padding-top:35px;
-    }
-
-    .page-title h2{
-        font-size:27px;
-    }
-
-    .delivery-container{
-        padding:0 15px;
-    }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- Header -->
-<header>
-    <h1>NOON.BD</h1>
-    <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
-</header>
 
-<!-- Navigation -->
+<header>
+
+<h1>🚚 NOON.BD</h1>
+
+<p>ডেলিভারি তথ্য</p>
+
 <nav>
-    <a href="index.html">🏠 হোম</a>
-    <a href="services.html">🛠️ সেবা</a>
-    <a href="products.html">🛍️ পণ্য</a>
-    <a href="orders.html">📦 অর্ডার</a>
-    <a href="delivery.html" class="active">🚚 ডেলিভারি</a>
-    <a href="contact.html">📞 যোগাযোগ</a>
-    <a href="admin.html">🔐 অ্যাডমিন</a>
+
+<a href="index.html">🏠 হোম</a>
+
+<a href="products.html">🛍️ পণ্য</a>
+
+<a href="orders.html">📦 অর্ডার</a>
+
+<a href="delivery.html">🚚 ডেলিভারি</a>
+
+<a href="contact.html">📞 যোগাযোগ</a>
+
+<a href="admin.html">🔐 অ্যাডমিন</a>
+
 </nav>
 
-<!-- Page title -->
-<section class="page-title">
+</header>
 
-    <h2>🚚 ডেলিভারি সেবা</h2>
 
-    <p>
-        আপনার অর্ডার নিরাপদে ও সুবিধাজনকভাবে
-        পৌঁছে দেওয়ার জন্য আমাদের ডেলিভারি ব্যবস্থা।
-    </p>
 
-</section>
+<div class="container">
 
 
-<!-- Main -->
-<main class="delivery-container">
+<div class="box">
 
+<h2>🚚 ডেলিভারি ব্যবস্থা</h2>
 
-    <!-- Delivery information -->
-    <section class="delivery-grid">
+<p>
+আপনার অর্ডার Confirm হওয়ার পর
+আপনার দেওয়া ঠিকানায় পণ্য পাঠানো হবে।
+</p>
 
-        <div class="delivery-card">
+<p>
+🚚 <strong>ডেলিভারি চার্জ: ৳150</strong>
+</p>
 
-            <div class="delivery-icon">📦</div>
+<p>
+💳 ডেলিভারি চার্জ অর্ডারের আগে
+bKash অথবা Nagad-এর মাধ্যমে প্রদান করতে হবে।
+</p>
 
-            <h3>অর্ডার প্রস্তুতি</h3>
+<p>
+📱 পেমেন্ট নম্বর:
+<strong>01343873070</strong>
+</p>
 
-            <p>
-                অর্ডার পাওয়ার পর আপনার পণ্য
-                ডেলিভারির জন্য প্রস্তুত করা হবে।
-            </p>
+</div>
 
-        </div>
 
 
-        <div class="delivery-card">
+<div class="box">
 
-            <div class="delivery-icon">🚚</div>
+<h2>📦 আপনার অর্ডারের অবস্থা</h2>
 
-            <h3>হোম ডেলিভারি</h3>
+<div id="deliveryOrders">
 
-            <p>
-                আপনার দেওয়া ঠিকানায়
-                পণ্য পৌঁছে দেওয়ার ব্যবস্থা থাকবে।
-            </p>
+<div class="empty">
+অর্ডার খোঁজা হচ্ছে...
+</div>
 
-        </div>
+</div>
 
+</div>
 
-        <div class="delivery-card">
 
-            <div class="delivery-icon">📞</div>
+</div>
 
-            <h3>যোগাযোগ</h3>
 
-            <p>
-                ডেলিভারির প্রয়োজনে আপনার দেওয়া
-                মোবাইল নম্বরে যোগাযোগ করা হতে পারে।
-            </p>
 
-        </div>
-
-
-        <div class="delivery-card">
-
-            <div class="delivery-icon">✅</div>
-
-            <h3>পণ্য গ্রহণ</h3>
-
-            <p>
-                পণ্য হাতে পাওয়ার পর
-                অর্ডারটি সম্পন্ন হিসেবে গণ্য হবে।
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- Steps -->
-    <section class="steps-box">
-
-        <h2>📋 ডেলিভারি কীভাবে হবে?</h2>
-
-        <div class="steps">
-
-            <div class="step">
-
-                <div class="number">১</div>
-
-                <h3>অর্ডার</h3>
-
-                <p>
-                    আপনি ওয়েবসাইট থেকে
-                    অর্ডার করবেন।
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="number">২</div>
-
-                <h3>যাচাই</h3>
-
-                <p>
-                    অর্ডারের তথ্য যাচাই
-                    করা হবে।
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="number">৩</div>
-
-                <h3>প্রস্তুতি</h3>
-
-                <p>
-                    পণ্য ডেলিভারির জন্য
-                    প্রস্তুত করা হবে।
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="number">৪</div>
-
-                <h3>ডেলিভারি</h3>
-
-                <p>
-                    আপনার ঠিকানায়
-                    পণ্য পৌঁছে দেওয়া হবে।
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Area -->
-    <section class="area-box">
-
-        <h2>📍 ডেলিভারি এলাকা</h2>
-
-        <p>
-            বর্তমানে আপনার ওয়েবসাইটে নির্দিষ্ট
-            ডেলিভারি এলাকা বা চার্জ দেওয়া হয়নি।
-        </p>
-
-        <p>
-            পরে এখানে আপনার ডেলিভারি এলাকা,
-            চার্জ এবং আনুমানিক সময় যোগ করতে পারবেন।
-        </p>
-
-        <a href="contact.html" class="btn">
-            📞 যোগাযোগ করুন
-        </a>
-
-    </section>
-
-
-    <!-- Notice -->
-    <section class="notice">
-
-        <h3>ℹ️ গুরুত্বপূর্ণ তথ্য</h3>
-
-        <p>
-            অর্ডার করার সময় সঠিক নাম, মোবাইল নম্বর
-            এবং সম্পূর্ণ ঠিকানা প্রদান করুন।
-            ভুল তথ্য দিলে ডেলিভারি বিলম্বিত হতে পারে।
-        </p>
-
-    </section>
-
-</main>
-
-
-<!-- Footer -->
 <footer>
 
-    <p><strong>NOON.BD</strong></p>
+<p>
+<strong>NOON.BD</strong>
+</p>
 
-    <p>
-        আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম
-    </p>
+<p>
+আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম
+</p>
 
-    <p>
-        © 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত
-    </p>
+<p>
+© 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত
+</p>
 
 </footer>
+
+
+
+<script>
+
+
+/* ======================================
+   GET ORDERS
+====================================== */
+
+function getOrders(){
+
+try{
+
+const data =
+localStorage.getItem("noonOrders");
+
+if(!data){
+
+return [];
+
+}
+
+const orders =
+JSON.parse(data);
+
+return Array.isArray(orders)
+? orders
+: [];
+
+}catch(error){
+
+return [];
+
+}
+
+}
+
+
+
+/* ======================================
+   ESCAPE TEXT
+====================================== */
+
+function escapeText(value){
+
+return String(value ?? "")
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+}
+
+
+
+/* ======================================
+   LOAD DELIVERY
+====================================== */
+
+function loadDelivery(){
+
+const orders =
+getOrders();
+
+const box =
+document.getElementById(
+"deliveryOrders"
+);
+
+
+if(!orders.length){
+
+box.innerHTML = `
+
+<div class="empty">
+
+📦 এখনো কোনো অর্ডার নেই।
+
+<br><br>
+
+<a
+class="back-btn"
+href="products.html">
+
+🛍️ পণ্য দেখুন
+
+</a>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+box.innerHTML =
+orders
+.slice()
+.reverse()
+.map(function(order){
+
+let status =
+order.status || "Pending";
+
+
+let statusText =
+"🟡 অর্ডার গ্রহণ করা হয়েছে";
+
+
+if(status === "Confirmed"){
+
+statusText =
+"🟢 অর্ডার Confirmed";
+
+}
+
+else if(status === "Delivered"){
+
+statusText =
+"🚚 পণ্য Delivered";
+
+}
+
+else if(status === "Cancelled"){
+
+statusText =
+"🔴 অর্ডার Cancelled";
+
+}
+
+
+return `
+
+<div class="delivery-card">
+
+<h3>
+
+📦 অর্ডার:
+
+${escapeText(
+order.id || "—"
+)}
+
+</h3>
+
+
+<div class="info">
+
+<p>
+
+👤 <strong>নাম:</strong>
+
+${escapeText(
+order.name || "—"
+)}
+
+</p>
+
+
+<p>
+
+📞 <strong>মোবাইল:</strong>
+
+${escapeText(
+order.phone || "—"
+)}
+
+</p>
+
+
+<p>
+
+📍 <strong>ডেলিভারি ঠিকানা:</strong>
+
+${escapeText(
+order.address || "—"
+)}
+
+</p>
+
+
+<p>
+
+💰 <strong>সর্বমোট:</strong>
+
+৳${Number(
+order.total || 0
+).toLocaleString("bn-BD")}
+
+</p>
+
+
+<p>
+
+📅 <strong>অর্ডারের সময়:</strong>
+
+${escapeText(
+order.date || "—"
+)}
+
+</p>
+
+</div>
+
+
+<div class="status">
+
+${statusText}
+
+</div>
+
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+
+/* ======================================
+   START
+====================================== */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+loadDelivery();
+
+});
+
+</script>
+
 
 </body>
 </html>
