@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NOON.BD Admin</title>
+<title>NOON.BD Admin Panel</title>
 
 <style>
 *{
@@ -22,22 +22,26 @@ header{
     background:#111827;
     color:white;
     text-align:center;
-    padding:22px;
+    padding:25px 15px;
+}
+
+header h1{
+    margin:0 0 6px;
 }
 
 nav{
     background:white;
-    padding:12px;
+    padding:10px;
     text-align:center;
     box-shadow:0 2px 8px #ddd;
 }
 
 nav a{
     display:inline-block;
-    margin:4px;
     padding:9px 12px;
-    color:#111827;
+    margin:3px;
     text-decoration:none;
+    color:#111827;
     font-weight:bold;
     border-radius:7px;
 }
@@ -62,12 +66,12 @@ nav a:hover{
 }
 
 button{
-    padding:10px 15px;
     border:0;
     border-radius:7px;
+    padding:10px 15px;
+    margin:4px;
     cursor:pointer;
     font-weight:bold;
-    margin:4px;
 }
 
 .add{
@@ -85,35 +89,24 @@ button{
     color:white;
 }
 
-input,
-textarea{
-    width:100%;
-    padding:11px;
-    margin:6px 0 12px;
-    border:1px solid #ccc;
-    border-radius:7px;
-    font-size:15px;
-}
-
-.product{
-    border:1px solid #ddd;
-    padding:15px;
-    margin:10px 0;
-    border-radius:10px;
-    background:#fafafa;
-}
-
+.product,
 .order{
+    background:#fafafa;
     border:1px solid #ddd;
-    padding:15px;
-    margin:10px 0;
     border-radius:10px;
+    padding:15px;
+    margin:12px 0;
+}
+
+.product h3,
+.order h3{
+    margin-top:0;
 }
 
 .empty{
     text-align:center;
     color:#777;
-    padding:20px;
+    padding:25px;
 }
 
 footer{
@@ -121,6 +114,10 @@ footer{
     color:white;
     text-align:center;
     padding:25px;
+}
+
+footer p{
+    margin:5px;
 }
 </style>
 </head>
@@ -143,7 +140,7 @@ footer{
 
 <div class="container">
 
-<!-- PRODUCT -->
+<!-- ================= PRODUCT ================= -->
 
 <div class="box">
 
@@ -164,7 +161,7 @@ footer{
 </div>
 
 
-<!-- ORDERS -->
+<!-- ================= ORDERS ================= -->
 
 <div class="box">
 
@@ -179,7 +176,7 @@ footer{
 </div>
 
 
-<!-- MESSAGES -->
+<!-- ================= MESSAGES ================= -->
 
 <div class="box">
 
@@ -195,17 +192,19 @@ footer{
 
 </div>
 
+
 <footer>
-    <p>NOON.BD Admin Panel</p>
+    <p><strong>NOON.BD</strong></p>
+    <p>Admin Panel</p>
     <p>© 2026 NOON.BD</p>
 </footer>
 
 
 <script>
 
-/* =====================================
+/* ==========================================
    DEFAULT PRODUCTS
-===================================== */
+========================================== */
 
 const defaultProducts = [
 
@@ -236,28 +235,35 @@ const defaultProducts = [
 ];
 
 
-/* =====================================
-   PRODUCT STORAGE
-===================================== */
+/* ==========================================
+   PRODUCTS
+========================================== */
 
 function getProducts(){
 
-    let data =
-        localStorage.getItem("noonProducts");
-
-    if(!data){
-
-        localStorage.setItem(
-            "noonProducts",
-            JSON.stringify(defaultProducts)
-        );
-
-        return defaultProducts;
-    }
-
     try{
 
-        return JSON.parse(data);
+        const data =
+            localStorage.getItem("noonProducts");
+
+        if(!data){
+
+            localStorage.setItem(
+                "noonProducts",
+                JSON.stringify(defaultProducts)
+            );
+
+            return defaultProducts;
+        }
+
+        const products =
+            JSON.parse(data);
+
+        if(!Array.isArray(products)){
+            throw new Error("Invalid products");
+        }
+
+        return products;
 
     }catch(error){
 
@@ -268,13 +274,12 @@ function getProducts(){
 
         return defaultProducts;
     }
-
 }
 
 
-/* =====================================
-   SHOW PRODUCTS
-===================================== */
+/* ==========================================
+   LOAD PRODUCTS
+========================================== */
 
 function loadProducts(){
 
@@ -285,7 +290,7 @@ function loadProducts(){
         document.getElementById("products");
 
 
-    if(products.length === 0){
+    if(!products.length){
 
         box.innerHTML =
             '<div class="empty">কোনো পণ্য নেই।</div>';
@@ -295,60 +300,62 @@ function loadProducts(){
 
 
     box.innerHTML =
-        products.map(
-            product => `
+        products.map(function(product){
 
-        <div class="product">
+            return `
 
-            <h3>
-                ${product.icon || "🛍️"}
-                ${escapeText(product.name)}
-            </h3>
+            <div class="product">
 
-            <p>
-                💰 দাম:
-                ৳${Number(product.price).toLocaleString()}
-            </p>
+                <h3>
+                    ${product.icon || "🛍️"}
+                    ${escapeText(product.name)}
+                </h3>
 
-            <p>
-                📦 স্টক:
-                ${product.stock}
-            </p>
+                <p>
+                    💰 দাম:
+                    ৳${Number(product.price).toLocaleString()}
+                </p>
 
-            <button
-                class="edit"
-                onclick="editProduct(${product.id})">
+                <p>
+                    📦 স্টক:
+                    ${Number(product.stock)}
+                </p>
 
-                ✏️ Edit
+                <button
+                    class="edit"
+                    onclick="editProduct(${product.id})">
 
-            </button>
+                    ✏️ Edit
 
-            <button
-                class="delete"
-                onclick="deleteProduct(${product.id})">
+                </button>
 
-                🗑️ Delete
+                <button
+                    class="delete"
+                    onclick="deleteProduct(${product.id})">
 
-            </button>
+                    🗑️ Delete
 
-        </div>
+                </button>
 
-    `
-        ).join("");
+            </div>
+
+            `;
+
+        }).join("");
 
 }
 
 
-/* =====================================
+/* ==========================================
    ADD PRODUCT
-===================================== */
+========================================== */
 
 function addProduct(){
 
     const name =
         prompt("পণ্যের নাম লিখুন:");
 
-    if(!name){
+    if(name === null || name.trim() === ""){
         return;
     }
 
@@ -384,7 +391,7 @@ function addProduct(){
 
         id:Date.now(),
 
-        name:name,
+        name:name.trim(),
 
         price:Number(price) || 0,
 
@@ -403,14 +410,15 @@ function addProduct(){
 
     loadProducts();
 
+
     alert("✅ পণ্য যোগ হয়েছে।");
 
 }
 
 
-/* =====================================
+/* ==========================================
    EDIT PRODUCT
-===================================== */
+========================================== */
 
 function editProduct(id){
 
@@ -419,15 +427,16 @@ function editProduct(id){
 
 
     const product =
-        products.find(
-            item =>
-            Number(item.id) === Number(id)
-        );
+        products.find(function(item){
+
+            return Number(item.id) === Number(id);
+
+        });
 
 
     if(!product){
 
-        alert("পণ্য পাওয়া যায়নি।");
+        alert("❌ পণ্য পাওয়া যায়নি।");
 
         return;
     }
@@ -447,7 +456,7 @@ function editProduct(id){
 
     const price =
         prompt(
-            "দাম:",
+            "পণ্যের দাম:",
             product.price
         );
 
@@ -469,7 +478,8 @@ function editProduct(id){
     }
 
 
-    product.name = name;
+    product.name =
+        name.trim();
 
     product.price =
         Number(price) || 0;
@@ -486,21 +496,25 @@ function editProduct(id){
 
     loadProducts();
 
+
     alert("✅ পণ্য আপডেট হয়েছে।");
 
 }
 
 
-/* =====================================
+/* ==========================================
    DELETE PRODUCT
-===================================== */
+========================================== */
 
 function deleteProduct(id){
 
-    if(!confirm(
-        "এই পণ্যটি মুছে ফেলবেন?"
-    )){
+    const ok =
+        confirm(
+            "এই পণ্যটি মুছে ফেলবেন?"
+        );
 
+
+    if(!ok){
         return;
     }
 
@@ -510,10 +524,12 @@ function deleteProduct(id){
 
 
     products =
-        products.filter(
-            product =>
-            Number(product.id) !== Number(id)
-        );
+        products.filter(function(product){
+
+            return Number(product.id)
+                !== Number(id);
+
+        });
 
 
     localStorage.setItem(
@@ -524,106 +540,170 @@ function deleteProduct(id){
 
     loadProducts();
 
+
+    alert("✅ পণ্য মুছে ফেলা হয়েছে।");
+
 }
 
 
-/* =====================================
+/* ==========================================
    ORDERS
-===================================== */
+========================================== */
+
+function getOrders(){
+
+    try{
+
+        const data =
+            localStorage.getItem("orders");
+
+        if(!data){
+            return [];
+        }
+
+        const orders =
+            JSON.parse(data);
+
+        return Array.isArray(orders)
+            ? orders
+            : [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+/* ==========================================
+   LOAD ORDERS
+========================================== */
 
 function loadOrders(){
 
     const orders =
-        JSON.parse(
-            localStorage.getItem("orders") || "[]"
-        );
+        getOrders();
 
 
     const box =
         document.getElementById("orders");
 
 
-    if(orders.length === 0){
+    if(!orders.length){
 
         box.innerHTML =
-            '<div class="empty">কোনো অর্ডার নেই।</div>';
+            '<div class="empty">📦 এখনো কোনো অর্ডার নেই।</div>';
 
         return;
     }
 
 
     box.innerHTML =
-        orders.map(
-            (order,index) => `
+        orders.map(function(order,index){
 
-        <div class="order">
+            return `
 
-            <h3>
-                📦 অর্ডার #${index + 1}
-            </h3>
+            <div class="order">
 
-            <p>
-                🛍️ পণ্য:
-                ${escapeText(order.product)}
-            </p>
+                <h3>
+                    📦 অর্ডার #${index + 1}
+                </h3>
 
-            <p>
-                💰 মূল্য:
-                ৳${escapeText(order.price)}
-            </p>
+                <p>
+                    🛍️ পণ্য:
+                    ${escapeText(order.product || "—")}
+                </p>
 
-            <p>
-                👤 নাম:
-                ${escapeText(order.name)}
-            </p>
+                <p>
+                    💰 মূল্য:
+                    ৳${escapeText(order.price || "0")}
+                </p>
 
-            <p>
-                📞 মোবাইল:
-                ${escapeText(order.phone)}
-            </p>
+                <p>
+                    👤 নাম:
+                    ${escapeText(order.name || "—")}
+                </p>
 
-            <p>
-                📍 ঠিকানা:
-                ${escapeText(order.address)}
-            </p>
+                <p>
+                    📞 মোবাইল:
+                    ${escapeText(order.phone || "—")}
+                </p>
 
-            <p>
-                💳 পেমেন্ট:
-                ${escapeText(order.payment)}
-            </p>
+                <p>
+                    📍 ঠিকানা:
+                    ${escapeText(order.address || "—")}
+                </p>
 
-            <p>
-                📅 ${escapeText(order.date)}
-            </p>
+                <p>
+                    💳 পেমেন্ট:
+                    ${escapeText(order.payment || "—")}
+                </p>
 
-        </div>
+                <p>
+                    📅 সময়:
+                    ${escapeText(order.date || "—")}
+                </p>
 
-    `
-        ).join("");
+            </div>
+
+            `;
+
+        }).join("");
 
 }
 
 
-/* =====================================
+/* ==========================================
    MESSAGES
-===================================== */
+========================================== */
+
+function getMessages(){
+
+    try{
+
+        const data =
+            localStorage.getItem("messages");
+
+        if(!data){
+            return [];
+        }
+
+        const messages =
+            JSON.parse(data);
+
+        return Array.isArray(messages)
+            ? messages
+            : [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+/* ==========================================
+   LOAD MESSAGES
+========================================== */
 
 function loadMessages(){
 
     const messages =
-        JSON.parse(
-            localStorage.getItem("messages") || "[]"
-        );
+        getMessages();
 
 
     const box =
         document.getElementById("messages");
 
 
-    if(messages.length === 0){
+    if(!messages.length){
 
         box.innerHTML =
-            '<div class="empty">কোনো মেসেজ নেই।</div>';
+            '<div class="empty">💬 কোনো মেসেজ নেই।</div>';
 
         return;
     }
@@ -633,38 +713,44 @@ function loadMessages(){
         messages
         .slice()
         .reverse()
-        .map(
-            message => `
+        .map(function(message){
 
-        <div class="order">
+            return `
 
-            <h3>
-                👤 ${escapeText(message.name)}
-            </h3>
+            <div class="order">
 
-            <p>
-                📞 ${escapeText(message.phone)}
-            </p>
+                <h3>
+                    👤
+                    ${escapeText(message.name || "নাম নেই")}
+                </h3>
 
-            <p>
-                💬 ${escapeText(message.message)}
-            </p>
+                <p>
+                    📞
+                    ${escapeText(message.phone || "—")}
+                </p>
 
-            <p>
-                📅 ${escapeText(message.date)}
-            </p>
+                <p>
+                    💬
+                    ${escapeText(message.message || "—")}
+                </p>
 
-        </div>
+                <p>
+                    📅
+                    ${escapeText(message.date || "—")}
+                </p>
 
-    `
-        ).join("");
+            </div>
+
+            `;
+
+        }).join("");
 
 }
 
 
-/* =====================================
-   SAFE TEXT
-===================================== */
+/* ==========================================
+   SECURITY
+========================================== */
 
 function escapeText(value){
 
@@ -678,15 +764,22 @@ function escapeText(value){
 }
 
 
-/* =====================================
+/* ==========================================
    START
-===================================== */
+========================================== */
 
-loadProducts();
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-loadOrders();
+        loadProducts();
 
-loadMessages();
+        loadOrders();
+
+        loadMessages();
+
+    }
+);
 
 </script>
 
