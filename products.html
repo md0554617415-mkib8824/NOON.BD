@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>NOON.BD — পণ্য</title>
+<style>
+body{font-family:Arial;margin:0;background:#f5f7fa}header{background:#111827;color:white;padding:18px;text-align:center}nav{text-align:center;background:white;padding:14px}nav a{margin:8px;color:#111827;text-decoration:none;font-weight:bold}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:30px}.card{background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 2px 10px #ddd}.card button{background:#111827;color:white;border:0;padding:10px 18px;border-radius:7px}
+</style></head>
+<body>
+<header><h1>NOON.BD</h1><p>পণ্যসমূহ</p></header>
+<nav><a href="index.html">হোম</a><a href="services.html">সেবা</a><a href="products.html">পণ্য</a><a href="orders.html">অর্ডার</a><a href="delivery.html">ডেলিভারি</a><a href="contact.html">যোগাযোগ</a><a href="admin.html">অ্যাডমিন</a></nav>
+<div class="grid">
+<div class="card"><h3>পণ্য ১</h3><p>মূল্য: ৳500</p><button onclick="order('পণ্য ১',500)">অর্ডার করুন</button></div>
+<div class="card"><h3>পণ্য ২</h3><p>মূল্য: ৳800</p><button onclick="order('পণ্য ২',800)">অর্ডার করুন</button></div>
+<div class="card"><h3>পণ্য ৩</h3><p>মূল্য: ৳1200</p><button onclick="order('পণ্য ৩',1200)">অর্ডার করুন</button></div>
+</div>
+<script>
+function order(name,price){
+localStorage.setItem("selectedProduct",name);
+localStorage.setItem("selectedPrice",price);
+location.href="orders.html";
+}
+</script>
+</body></html>
