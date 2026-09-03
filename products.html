@@ -7,9 +7,7 @@
 <title>NOON.BD - Products</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
@@ -21,13 +19,11 @@ body{
 header{
     background:#111;
     color:white;
-    padding:18px 20px;
+    padding:18px;
     text-align:center;
 }
 
-header h1{
-    margin:0 0 5px;
-}
+header h1{margin:0}
 
 nav{
     margin-top:15px;
@@ -36,7 +32,7 @@ nav{
 nav a{
     color:white;
     text-decoration:none;
-    margin:0 7px;
+    margin:0 6px;
     font-size:14px;
 }
 
@@ -53,7 +49,8 @@ nav a{
 
 .product-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
 }
 
@@ -65,20 +62,23 @@ nav a{
     text-align:center;
 }
 
-.product img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    border-radius:10px;
+.product-icon{
+    font-size:70px;
+    padding:15px;
 }
 
 .product h3{
-    margin:12px 0 8px;
+    margin:10px 0;
 }
 
 .price{
-    font-size:20px;
+    font-size:21px;
     font-weight:bold;
+    margin:10px 0;
+}
+
+.stock{
+    color:#555;
     margin-bottom:12px;
 }
 
@@ -93,6 +93,12 @@ button{
 .add-btn{
     background:#111;
     color:white;
+    width:100%;
+}
+
+.add-btn:disabled{
+    background:#aaa;
+    cursor:not-allowed;
 }
 
 .cart-box{
@@ -134,12 +140,12 @@ button{
     margin-top:15px;
     background:#168a3b;
     color:white;
-    text-align:center;
 }
 
 .empty{
     text-align:center;
     color:#777;
+    padding:25px;
 }
 
 footer{
@@ -152,34 +158,58 @@ footer{
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
 <h1>NOON.BD</h1>
+
 <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
 
 <nav>
+
 <a href="index.html">🏠 হোম</a>
+
 <a href="products.html">🛍️ পণ্য</a>
+
 <a href="orders.html">📦 অর্ডার</a>
+
 <a href="delivery.html">🚚 ডেলিভারি</a>
+
 <a href="contact.html">📞 যোগাযোগ</a>
+
 <a href="admin.html">🔐 অ্যাডমিন</a>
+
 </nav>
 
 </header>
 
 
+
 <div class="container">
 
+
 <div class="section-title">
+
 <h2>🛍️ আমাদের পণ্য</h2>
-<p>আপনার পছন্দের পণ্য নির্বাচন করে কার্টে যোগ করুন।</p>
+
+<p>
+আপনার পছন্দের পণ্য নির্বাচন করে
+কার্টে যোগ করুন।
+</p>
+
 </div>
 
 
-<div id="productGrid" class="product-grid"></div>
+
+<div
+id="productGrid"
+class="product-grid">
+
+</div>
+
 
 
 <div class="cart-box">
@@ -187,103 +217,262 @@ footer{
 <h2>🛒 আপনার কার্ট</h2>
 
 <div id="cartItems">
-<p class="empty">কার্ট এখনো খালি।</p>
+
+<p class="empty">
+কার্ট এখনো খালি।
+</p>
+
 </div>
+
 
 <div class="total">
-মোট: ৳<span id="cartTotal">0</span>
+
+মোট:
+৳<span id="cartTotal">0</span>
+
 </div>
 
-<button class="checkout" onclick="checkout()">
+
+<button
+class="checkout"
+onclick="checkout()">
+
 ✅ অর্ডার করতে এগিয়ে যান
+
 </button>
 
 </div>
 
 </div>
+
 
 
 <footer>
 
 <h3>NOON.BD</h3>
 
-<p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
+<p>
+আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম
+</p>
 
-<p>© 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত</p>
+<p>
+© 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত
+</p>
 
 </footer>
 
 
+
 <script>
 
-const products = [
 
-{
-id:1,
-name:"প্রডাক্ট ১",
-price:500,
-image:"https://via.placeholder.com/400x300?text=Product+1"
-},
+/* ======================================
+   PRODUCTS FROM ADMIN PANEL
+====================================== */
 
-{
-id:2,
-name:"প্রডাক্ট ২",
-price:750,
-image:"https://via.placeholder.com/400x300?text=Product+2"
-},
+function getProducts(){
 
-{
-id:3,
-name:"প্রডাক্ট ৩",
-price:1000,
-image:"https://via.placeholder.com/400x300?text=Product+3"
-},
+try{
 
-{
-id:4,
-name:"প্রডাক্ট ৪",
-price:1200,
-image:"https://via.placeholder.com/400x300?text=Product+4"
+const data =
+localStorage.getItem("noonProducts");
+
+if(!data){
+
+return [];
+
 }
 
-];
+const products =
+JSON.parse(data);
+
+return Array.isArray(products)
+? products
+: [];
+
+}catch(error){
+
+return [];
+
+}
+
+}
 
 
-let cart = JSON.parse(localStorage.getItem("noonCart")) || [];
 
+/* ======================================
+   CART
+====================================== */
+
+let cart =
+JSON.parse(
+localStorage.getItem("noonCart")
+) || [];
+
+
+
+/* ======================================
+   SHOW PRODUCTS
+====================================== */
 
 function showProducts(){
 
-const grid = document.getElementById("productGrid");
+const products =
+getProducts();
 
-grid.innerHTML = products.map(product => `
+const grid =
+document.getElementById(
+"productGrid"
+);
+
+
+if(!products.length){
+
+grid.innerHTML = `
+
+<div class="empty">
+
+🛍️ এখনো কোনো পণ্য যোগ করা হয়নি।
+
+<br><br>
+
+Admin Panel থেকে পণ্য যোগ করুন।
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+grid.innerHTML =
+products.map(function(product){
+
+const stock =
+Number(product.stock || 0);
+
+
+return `
 
 <div class="product">
 
-<img src="${product.image}" alt="${product.name}">
+<div class="product-icon">
 
-<h3>${product.name}</h3>
+${product.icon || "🛍️"}
 
-<div class="price">
-৳${product.price}
 </div>
 
-<button class="add-btn" onclick="addToCart(${product.id})">
-🛒 কার্টে যোগ করুন
+
+<h3>
+
+${escapeText(product.name)}
+
+</h3>
+
+
+<div class="price">
+
+৳${Number(
+product.price || 0
+).toLocaleString("bn-BD")}
+
+</div>
+
+
+<div class="stock">
+
+📦 স্টক:
+${stock}
+
+</div>
+
+
+<button
+
+class="add-btn"
+
+onclick="addToCart(${product.id})"
+
+${stock <= 0 ? "disabled" : ""}>
+
+${stock <= 0
+? "স্টক শেষ"
+: "🛒 কার্টে যোগ করুন"}
+
 </button>
 
 </div>
 
-`).join("");
+`;
+
+}).join("");
 
 }
 
 
+
+/* ======================================
+   ADD TO CART
+====================================== */
+
 function addToCart(id){
 
-const product = products.find(p => p.id === id);
+const products =
+getProducts();
 
-const existing = cart.find(item => item.id === id);
+
+const product =
+products.find(function(item){
+
+return Number(item.id)
+===
+Number(id);
+
+});
+
+
+if(!product){
+
+alert(
+"❌ পণ্য পাওয়া যায়নি।"
+);
+
+return;
+
+}
+
+
+const existing =
+cart.find(function(item){
+
+return Number(item.id)
+===
+Number(id);
+
+});
+
+
+const currentQuantity =
+existing
+? Number(existing.quantity)
+: 0;
+
+
+if(
+currentQuantity >=
+Number(product.stock)
+){
+
+alert(
+"❌ এই পণ্যের আর স্টক নেই।"
+);
+
+return;
+
+}
+
 
 if(existing){
 
@@ -292,127 +481,275 @@ existing.quantity++;
 }else{
 
 cart.push({
+
 id:product.id,
+
 name:product.name,
-price:product.price,
+
+price:Number(product.price),
+
 quantity:1
+
 });
 
 }
 
+
 saveCart();
 
 renderCart();
 
-alert("পণ্যটি কার্টে যোগ হয়েছে।");
+alert(
+"✅ পণ্যটি কার্টে যোগ হয়েছে।"
+);
 
 }
 
+
+
+/* ======================================
+   INCREASE
+====================================== */
 
 function increase(id){
 
-const item = cart.find(item => item.id === id);
-
-if(item){
-
-item.quantity++;
-
-}
-
-saveCart();
-
-renderCart();
-
-}
+const products =
+getProducts();
 
 
-function decrease(id){
+const product =
+products.find(function(item){
 
-const item = cart.find(item => item.id === id);
+return Number(item.id)
+===
+Number(id);
 
-if(item){
-
-item.quantity--;
-
-if(item.quantity <= 0){
-
-cart = cart.filter(item => item.id !== id);
-
-}
-
-}
-
-saveCart();
-
-renderCart();
-
-}
+});
 
 
-function removeItem(id){
+const item =
+cart.find(function(item){
 
-cart = cart.filter(item => item.id !== id);
+return Number(item.id)
+===
+Number(id);
 
-saveCart();
-
-renderCart();
-
-}
+});
 
 
-function renderCart(){
-
-const container = document.getElementById("cartItems");
-
-if(cart.length === 0){
-
-container.innerHTML =
-'<p class="empty">কার্ট এখনো খালি।</p>';
-
-document.getElementById("cartTotal").innerText = "0";
+if(!item || !product){
 
 return;
 
 }
 
 
-container.innerHTML = cart.map(item => `
+if(
+item.quantity >=
+Number(product.stock)
+){
+
+alert(
+"❌ স্টকের বেশি নেওয়া যাবে না।"
+);
+
+return;
+
+}
+
+
+item.quantity++;
+
+saveCart();
+
+renderCart();
+
+}
+
+
+
+/* ======================================
+   DECREASE
+====================================== */
+
+function decrease(id){
+
+const item =
+cart.find(function(item){
+
+return Number(item.id)
+===
+Number(id);
+
+});
+
+
+if(!item){
+
+return;
+
+}
+
+
+item.quantity--;
+
+
+if(item.quantity <= 0){
+
+cart =
+cart.filter(function(item){
+
+return Number(item.id)
+!==
+Number(id);
+
+});
+
+}
+
+
+saveCart();
+
+renderCart();
+
+}
+
+
+
+/* ======================================
+   REMOVE
+====================================== */
+
+function removeItem(id){
+
+cart =
+cart.filter(function(item){
+
+return Number(item.id)
+!==
+Number(id);
+
+});
+
+
+saveCart();
+
+renderCart();
+
+}
+
+
+
+/* ======================================
+   RENDER CART
+====================================== */
+
+function renderCart(){
+
+const container =
+document.getElementById(
+"cartItems"
+);
+
+
+if(!cart.length){
+
+container.innerHTML =
+'<p class="empty">কার্ট এখনো খালি।</p>';
+
+document.getElementById(
+"cartTotal"
+).innerText = "0";
+
+return;
+
+}
+
+
+container.innerHTML =
+cart.map(function(item){
+
+return `
 
 <div class="cart-item">
 
 <div>
-<strong>${item.name}</strong><br>
-৳${item.price} × ${item.quantity}
-</div>
 
-<div class="qty">
+<strong>
+${escapeText(item.name)}
+</strong>
 
-<button onclick="decrease(${item.id})">−</button>
+<br>
+
+৳${Number(item.price).toLocaleString("bn-BD")}
+
+×
 
 ${item.quantity}
 
-<button onclick="increase(${item.id})">+</button>
+</div>
 
-<button class="remove" onclick="removeItem(${item.id})">
+
+<div class="qty">
+
+<button
+onclick="decrease(${item.id})">
+
+−
+
+</button>
+
+
+${item.quantity}
+
+
+<button
+onclick="increase(${item.id})">
+
++
+
+</button>
+
+
+<button
+class="remove"
+onclick="removeItem(${item.id})">
+
 🗑️
+
 </button>
 
 </div>
 
 </div>
 
-`).join("");
+`;
+
+}).join("");
 
 
-const total = cart.reduce(
-(sum,item) => sum + item.price * item.quantity,
-0
-);
+const total =
+cart.reduce(function(sum,item){
 
-document.getElementById("cartTotal").innerText = total;
+return sum +
+Number(item.price) *
+Number(item.quantity);
+
+},0);
+
+
+document.getElementById(
+"cartTotal"
+).innerText =
+total.toLocaleString("bn-BD");
 
 }
 
+
+
+/* ======================================
+   SAVE CART
+====================================== */
 
 function saveCart(){
 
@@ -424,26 +761,69 @@ JSON.stringify(cart)
 }
 
 
+
+/* ======================================
+   CHECKOUT
+====================================== */
+
 function checkout(){
 
-if(cart.length === 0){
+if(!cart.length){
 
-alert("আপনার কার্ট খালি।");
+alert(
+"❌ আপনার কার্ট খালি।"
+);
 
 return;
 
 }
 
-window.location.href = "orders.html";
+
+window.location.href =
+"orders.html";
 
 }
 
+
+
+/* ======================================
+   ESCAPE TEXT
+====================================== */
+
+function escapeText(value){
+
+return String(value ?? "")
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+}
+
+
+
+/* ======================================
+   START
+====================================== */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
 showProducts();
 
 renderCart();
 
+});
+
 </script>
+
 
 </body>
 </html>
