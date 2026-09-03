@@ -1,60 +1,50 @@
 <!DOCTYPE html>
 <html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOON.BD - অর্ডার</title>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>NOON.BD — অর্ডার</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fa;color:#222}
-header{background:#111827;color:white;padding:18px 20px;font-size:23px;font-weight:bold}
-.container{max-width:700px;margin:auto;padding:25px 15px}
-.box{background:white;padding:25px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
-h1{text-align:center}
-input,select{width:100%;padding:12px;margin:8px 0 15px;border:1px solid #ddd;border-radius:8px}
-button{background:#111827;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer}
-.submit{width:100%;margin-top:10px}
-.home{margin-top:20px}
-</style>
-</head>
-
+body{font-family:Arial;margin:0;background:#f5f7fa}header{background:#111827;color:white;padding:18px;text-align:center}nav{text-align:center;background:white;padding:14px}nav a{margin:8px;color:#111827;text-decoration:none;font-weight:bold}.form{max-width:600px;margin:30px auto;background:white;padding:25px;border-radius:12px;box-shadow:0 2px 10px #ddd}input,textarea{width:100%;box-sizing:border-box;padding:12px;margin:8px 0 15px;border:1px solid #ccc;border-radius:7px}button{background:#111827;color:white;border:0;padding:12px 25px;border-radius:7px}
+</style></head>
 <body>
+<header><h1>NOON.BD</h1><p>অর্ডার করুন</p></header>
+<nav><a href="index.html">হোম</a><a href="services.html">সেবা</a><a href="products.html">পণ্য</a><a href="orders.html">অর্ডার</a><a href="delivery.html">ডেলিভারি</a><a href="contact.html">যোগাযোগ</a><a href="admin.html">অ্যাডমিন</a></nav>
 
-<header>NOON.BD</header>
-
-<div class="container">
-
-<div class="box">
-<h1>📦 অর্ডার করুন</h1>
-
-<label>পণ্য নির্বাচন করুন</label>
-<select>
-<option>পণ্য ১ - ৳500</option>
-<option>পণ্য ২ - ৳800</option>
-<option>পণ্য ৩ - ৳1000</option>
-<option>পণ্য ৪ - ৳1200</option>
-</select>
-
-<label>আপনার নাম</label>
-<input type="text" placeholder="নাম লিখুন">
-
+<div class="form">
+<h2>অর্ডার ফর্ম</h2>
+<label>পণ্যের নাম</label>
+<input id="product" readonly>
+<label>মূল্য</label>
+<input id="price" readonly>
+<label>নাম</label>
+<input id="name" placeholder="আপনার নাম">
 <label>মোবাইল নম্বর</label>
-<input type="tel" placeholder="মোবাইল নম্বর লিখুন">
-
+<input id="phone" placeholder="01XXXXXXXXX">
 <label>ঠিকানা</label>
-<input type="text" placeholder="সম্পূর্ণ ঠিকানা লিখুন">
-
-<button class="submit" onclick="alert('আপনার অর্ডার গ্রহণ করা হয়েছে!')">
-অর্ডার নিশ্চিত করুন
-</button>
-
-<button class="home" onclick="location.href='services.html'">
-← সেবায় ফিরে যান
-</button>
-
+<textarea id="address" placeholder="সম্পূর্ণ ঠিকানা"></textarea>
+<button onclick="submitOrder()">অর্ডার নিশ্চিত করুন</button>
+<p id="msg"></p>
 </div>
 
-</div>
+<script>
+document.getElementById("product").value=localStorage.getItem("selectedProduct")||"";
+document.getElementById("price").value=localStorage.getItem("selectedPrice")||"";
 
-</body>
-</html>
+function submitOrder(){
+let order={
+product:document.getElementById("product").value,
+price:document.getElementById("price").value,
+name:document.getElementById("name").value,
+phone:document.getElementById("phone").value,
+address:document.getElementById("address").value,
+time:new Date().toLocaleString("bn-BD")
+};
+if(!order.product||!order.name||!order.phone||!order.address){
+alert("সব তথ্য পূরণ করুন");
+return;
+}
+let orders=JSON.parse(localStorage.getItem("orders")||"[]");
+orders.push(order);
+localStorage.setItem("orders",JSON.stringify(orders));
+document.getElementById("msg").innerHTML="<b>আপনার অর্ডার গ্রহণ করা হয়েছে ✅</b>";
+}
+</script>
+</body></html>
