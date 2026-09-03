@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NOON.BD - পণ্য</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -31,6 +34,7 @@ header{
 
 h1{
   text-align:center;
+  margin-bottom:25px;
 }
 
 .products{
@@ -41,7 +45,7 @@ h1{
 
 .product{
   background:white;
-  padding:20px;
+  padding:22px;
   border-radius:15px;
   text-align:center;
   box-shadow:0 3px 10px rgba(0,0,0,.06);
@@ -51,23 +55,24 @@ h1{
   margin-top:0;
 }
 
-.product button{
+.order-btn{
+  display:inline-block;
   background:#111827;
   color:white;
-  border:0;
-  padding:11px 20px;
+  padding:12px 22px;
   border-radius:8px;
-  cursor:pointer;
+  text-decoration:none;
+  font-size:16px;
 }
 
 .home{
+  display:inline-block;
   margin-top:25px;
   background:#111827;
   color:white;
-  border:0;
   padding:12px 20px;
   border-radius:8px;
-  cursor:pointer;
+  text-decoration:none;
 }
 
 @media(max-width:600px){
@@ -91,36 +96,48 @@ h1{
 <div class="product">
 <h2>পণ্য ১</h2>
 <p>সুন্দর একটি পণ্য</p>
-<p>৳ 500</p>
-<button onclick="location.href='orders.html'">অর্ডার করুন</button>
+<p><strong>৳ 500</strong></p>
+
+<a href="orders.html" class="order-btn">
+অর্ডার করুন
+</a>
 </div>
 
 <div class="product">
 <h2>পণ্য ২</h2>
 <p>জনপ্রিয় একটি পণ্য</p>
-<p>৳ 800</p>
-<button onclick="location.href='orders.html'">অর্ডার করুন</button>
+<p><strong>৳ 800</strong></p>
+
+<a href="orders.html" class="order-btn">
+অর্ডার করুন
+</a>
 </div>
 
 <div class="product">
 <h2>পণ্য ৩</h2>
 <p>নতুন একটি পণ্য</p>
-<p>৳ 1000</p>
-<button onclick="location.href='orders.html'">অর্ডার করুন</button>
+<p><strong>৳ 1000</strong></p>
+
+<a href="orders.html" class="order-btn">
+অর্ডার করুন
+</a>
 </div>
 
 <div class="product">
 <h2>পণ্য ৪</h2>
 <p>বিশেষ অফারের পণ্য</p>
-<p>৳ 1200</p>
-<button onclick="location.href='orders.html'">অর্ডার করুন</button>
+<p><strong>৳ 1200</strong></p>
+
+<a href="orders.html" class="order-btn">
+অর্ডার করুন
+</a>
 </div>
 
 </div>
 
-<button class="home" onclick="location.href='services.html'">
+<a href="services.html" class="home">
 ← সেবায় ফিরে যান
-</button>
+</a>
 
 </div>
 
