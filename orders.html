@@ -7,6 +7,7 @@
 <title>NOON.BD - Order</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -15,17 +16,18 @@ body{
     margin:0;
     font-family:Arial,"Noto Sans Bengali",sans-serif;
     background:#f5f5f5;
+    color:#222;
 }
 
 header{
-    background:#111;
+    background:#111827;
     color:white;
     text-align:center;
-    padding:18px;
+    padding:20px 15px;
 }
 
 header h1{
-    margin:0;
+    margin:0 0 5px;
 }
 
 nav{
@@ -40,32 +42,62 @@ nav a{
 }
 
 .container{
-    max-width:700px;
-    margin:auto;
-    padding:25px 15px;
+    max-width:800px;
+    margin:25px auto;
+    padding:15px;
 }
 
 .box{
     background:white;
     padding:20px;
-    border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
     margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 3px 12px #ddd;
 }
 
 h2{
     margin-top:0;
 }
 
+.order-item{
+    padding:12px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.order-item:last-child{
+    border-bottom:0;
+}
+
+.summary{
+    background:#f8fafc;
+    padding:15px;
+    border-radius:8px;
+    margin-top:15px;
+}
+
+.summary p{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+}
+
+.grand-total{
+    font-size:22px;
+    font-weight:bold;
+    border-top:2px solid #ddd;
+    padding-top:12px;
+}
+
 label{
     display:block;
+    font-weight:bold;
     margin-top:15px;
     margin-bottom:6px;
-    font-weight:bold;
 }
 
 input,
-textarea{
+textarea,
+select{
     width:100%;
     padding:12px;
     border:1px solid #ccc;
@@ -74,59 +106,89 @@ textarea{
 }
 
 textarea{
-    min-height:100px;
+    min-height:90px;
     resize:vertical;
 }
 
-.order-item{
-    padding:10px 0;
-    border-bottom:1px solid #ddd;
-}
-
-.total{
-    text-align:right;
-    font-size:21px;
-    font-weight:bold;
+.payment-box{
+    background:#fff8e8;
+    border:1px solid #f0d58a;
+    padding:15px;
+    border-radius:8px;
     margin-top:15px;
 }
 
-button{
+.payment-number{
+    font-size:20px;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+.submit-btn{
     width:100%;
-    margin-top:20px;
-    padding:14px;
-    border:0;
-    border-radius:8px;
     background:#168a3b;
     color:white;
+    border:0;
+    padding:14px;
+    border-radius:8px;
     font-size:17px;
+    font-weight:bold;
     cursor:pointer;
+    margin-top:20px;
+}
+
+.submit-btn:hover{
+    background:#116b2e;
 }
 
 .empty{
     text-align:center;
     color:#777;
+    padding:30px;
 }
 
 .success{
-    display:none;
     text-align:center;
-    background:#e8f7ed;
-    padding:20px;
+    background:#ecfdf3;
+    border:1px solid #86efac;
+    padding:25px;
     border-radius:10px;
-    margin-top:20px;
+}
+
+.success h2{
+    color:#168a3b;
 }
 
 footer{
-    margin-top:30px;
-    background:#111;
+    margin-top:40px;
+    background:#111827;
     color:white;
     text-align:center;
     padding:25px;
 }
+
+footer p{
+    margin:5px;
+}
+
+@media(max-width:600px){
+
+    .container{
+        padding:10px;
+    }
+
+    .box{
+        padding:15px;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -135,34 +197,115 @@ footer{
 <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
 
 <nav>
+
 <a href="index.html">🏠 হোম</a>
+
 <a href="products.html">🛍️ পণ্য</a>
+
 <a href="orders.html">📦 অর্ডার</a>
+
 <a href="delivery.html">🚚 ডেলিভারি</a>
+
 <a href="contact.html">📞 যোগাযোগ</a>
+
 <a href="admin.html">🔐 অ্যাডমিন</a>
+
 </nav>
 
 </header>
 
 
+
 <div class="container">
+
+
+<!-- ================= ORDER SUMMARY ================= -->
 
 <div class="box">
 
-<h2>📦 অর্ডার করুন</h2>
+<h2>🛒 আপনার অর্ডার</h2>
 
-<form id="orderForm">
+<div id="orderItems">
 
-<label>আপনার নাম</label>
+<div class="empty">
+অর্ডার লোড হচ্ছে...
+</div>
+
+</div>
+
+
+<div class="summary">
+
+<p>
+
+<span>🛍️ পণ্যের মোট</span>
+
+<strong>
+৳<span id="productTotal">0</span>
+</strong>
+
+</p>
+
+
+<p>
+
+<span>🚚 ডেলিভারি চার্জ</span>
+
+<strong>
+৳150
+</strong>
+
+</p>
+
+
+<p class="grand-total">
+
+<span>💰 সর্বমোট</span>
+
+<strong>
+৳<span id="grandTotal">150</span>
+</strong>
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= CUSTOMER INFORMATION ================= -->
+
+<div
+class="box"
+id="orderFormBox"
+>
+
+<h2>👤 আপনার তথ্য</h2>
+
+
+<form
+id="orderForm"
+>
+
+
+<label>
+নাম *
+</label>
+
 <input
 type="text"
 id="name"
-placeholder="আপনার নাম লিখুন"
+placeholder="আপনার নাম"
 required
 >
 
-<label>মোবাইল নম্বর</label>
+
+
+<label>
+মোবাইল নম্বর *
+</label>
+
 <input
 type="tel"
 id="phone"
@@ -170,15 +313,97 @@ placeholder="01XXXXXXXXX"
 required
 >
 
-<label>সম্পূর্ণ ঠিকানা</label>
+
+
+<label>
+ডেলিভারি ঠিকানা *
+</label>
+
 <textarea
 id="address"
-placeholder="বাড়ি/রোড, এলাকা, থানা, জেলা"
+placeholder="আপনার সম্পূর্ণ ঠিকানা"
 required
 ></textarea>
 
-<button type="submit">
-✅ অর্ডার নিশ্চিত করুন
+
+
+<label>
+💳 পেমেন্ট মাধ্যম *
+</label>
+
+<select
+id="paymentMethod"
+required
+>
+
+<option value="">
+পেমেন্ট মাধ্যম নির্বাচন করুন
+</option>
+
+<option value="bKash">
+bKash
+</option>
+
+<option value="Nagad">
+Nagad
+</option>
+
+</select>
+
+
+
+<div class="payment-box">
+
+<h3>
+🚚 ডেলিভারি চার্জ আগে পেমেন্ট করুন
+</h3>
+
+<p>
+অর্ডার নিশ্চিত করার জন্য আগে
+<strong>৳150</strong>
+ডেলিভারি চার্জ পাঠাতে হবে।
+</p>
+
+
+<p>
+bKash অথবা Nagad-এ পাঠান:
+</p>
+
+
+<div class="payment-number">
+01343873070
+</div>
+
+
+<p>
+পেমেন্ট করার পর নিচে
+Transaction ID দিন।
+</p>
+
+</div>
+
+
+
+<label>
+🧾 Transaction ID *
+</label>
+
+<input
+type="text"
+id="transactionId"
+placeholder="যেমন: 8A7B6C5D"
+required
+>
+
+
+
+<button
+type="submit"
+class="submit-btn"
+>
+
+✅ অর্ডার কনফার্ম করুন
+
 </button>
 
 </form>
@@ -186,114 +411,260 @@ required
 </div>
 
 
-<div class="box">
 
-<h2>🛒 আপনার অর্ডার</h2>
+<!-- ================= SUCCESS ================= -->
 
-<div id="orderItems"></div>
+<div
+class="box"
+id="successBox"
+style="display:none;"
+>
 
-<div class="total">
-মোট: ৳<span id="orderTotal">0</span>
-</div>
+<div class="success">
 
-</div>
-
-
-<div id="success" class="success">
-
-<h2>🎉 অর্ডার গ্রহণ করা হয়েছে!</h2>
+<h2>
+✅ অর্ডার গ্রহণ করা হয়েছে
+</h2>
 
 <p>
-ধন্যবাদ। আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে।
+আপনার অর্ডারের তথ্য সফলভাবে জমা হয়েছে।
 </p>
 
 <p>
-আমরা আপনার দেওয়া মোবাইল নম্বরে যোগাযোগ করব।
+আমরা Transaction ID যাচাই করে
+অর্ডারটি Confirm করব।
 </p>
 
+<h3>
+📦 অর্ডার ID:
+<span id="successOrderId"></span>
+</h3>
+
+<a
+href="products.html"
+style="
+display:inline-block;
+margin-top:15px;
+background:#111827;
+color:white;
+padding:11px 18px;
+border-radius:7px;
+text-decoration:none;
+"
+>
+
+🛍️ পণ্যে ফিরে যান
+
+</a>
+
 </div>
 
 </div>
+
+
+</div>
+
 
 
 <footer>
 
-<h3>NOON.BD</h3>
+<p>
+<strong>NOON.BD</strong>
+</p>
 
-<p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
+<p>
+আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম
+</p>
 
-<p>© 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত</p>
+<p>
+© 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত
+</p>
 
 </footer>
 
 
+
 <script>
 
-let cart =
-JSON.parse(localStorage.getItem("noonCart")) || [];
 
+/* ======================================
+   CART
+====================================== */
+
+let cart =
+JSON.parse(
+localStorage.getItem("noonCart")
+) || [];
+
+
+const DELIVERY_CHARGE = 150;
+
+
+
+/* ======================================
+   ESCAPE TEXT
+====================================== */
+
+function escapeText(value){
+
+return String(value ?? "")
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+}
+
+
+
+/* ======================================
+   SHOW ORDER
+====================================== */
 
 function showOrder(){
 
-const items =
-document.getElementById("orderItems");
+const box =
+document.getElementById(
+"orderItems"
+);
 
-const totalElement =
-document.getElementById("orderTotal");
 
+if(!cart.length){
 
-if(cart.length === 0){
+box.innerHTML = `
 
-items.innerHTML =
-'<p class="empty">আপনার কার্ট খালি।</p>';
+<div class="empty">
 
-totalElement.innerText = "0";
+🛒 আপনার কার্ট খালি।
+
+<br><br>
+
+<a href="products.html">
+🛍️ পণ্য কিনতে যান
+</a>
+
+</div>
+
+`;
+
+document.getElementById(
+"productTotal"
+).innerText = "0";
+
+document.getElementById(
+"grandTotal"
+).innerText =
+DELIVERY_CHARGE;
+
+document.getElementById(
+"orderFormBox"
+).style.display =
+"none";
 
 return;
 
 }
 
 
-items.innerHTML = cart.map(item => `
+box.innerHTML =
+cart.map(function(item){
+
+const price =
+Number(item.price || 0);
+
+const quantity =
+Number(item.quantity || 1);
+
+const subtotal =
+price * quantity;
+
+
+return `
 
 <div class="order-item">
 
-<strong>${item.name}</strong>
+<strong>
+${escapeText(item.name)}
+</strong>
 
 <br>
 
-৳${item.price} × ${item.quantity}
+৳${price.toLocaleString("bn-BD")}
+
+×
+
+${quantity}
 
 =
-৳${item.price * item.quantity}
+
+<strong>
+৳${subtotal.toLocaleString("bn-BD")}
+</strong>
 
 </div>
 
-`).join("");
+`;
+
+}).join("");
 
 
-const total = cart.reduce(
-(sum,item) =>
-sum + item.price * item.quantity,
-0
-);
+const productTotal =
+cart.reduce(function(
+sum,
+item
+){
+
+return sum +
+Number(item.price || 0) *
+Number(item.quantity || 1);
+
+},0);
 
 
-totalElement.innerText = total;
+const grandTotal =
+productTotal +
+DELIVERY_CHARGE;
+
+
+document.getElementById(
+"productTotal"
+).innerText =
+productTotal.toLocaleString("bn-BD");
+
+
+document.getElementById(
+"grandTotal"
+).innerText =
+grandTotal.toLocaleString("bn-BD");
 
 }
 
 
-document
-.getElementById("orderForm")
-.addEventListener("submit", function(e){
 
-e.preventDefault();
+/* ======================================
+   SUBMIT ORDER
+====================================== */
+
+document.getElementById(
+"orderForm"
+).addEventListener(
+"submit",
+function(event){
+
+event.preventDefault();
 
 
-if(cart.length === 0){
+if(!cart.length){
 
-alert("আপনার কার্ট খালি।");
+alert(
+"❌ আপনার কার্ট খালি।"
+);
 
 return;
 
@@ -301,25 +672,93 @@ return;
 
 
 const name =
-document.getElementById("name").value;
+document.getElementById(
+"name"
+).value.trim();
+
 
 const phone =
-document.getElementById("phone").value;
+document.getElementById(
+"phone"
+).value.trim();
+
 
 const address =
-document.getElementById("address").value;
+document.getElementById(
+"address"
+).value.trim();
 
 
-const total = cart.reduce(
-(sum,item) =>
-sum + item.price * item.quantity,
-0
+const paymentMethod =
+document.getElementById(
+"paymentMethod"
+).value;
+
+
+const transactionId =
+document.getElementById(
+"transactionId"
+).value.trim();
+
+
+if(
+!name ||
+!phone ||
+!address ||
+!paymentMethod ||
+!transactionId
+){
+
+alert(
+"❌ সব তথ্য পূরণ করুন।"
 );
 
+return;
+
+}
+
+
+
+/* ======================================
+   TOTAL
+====================================== */
+
+const productTotal =
+cart.reduce(function(
+sum,
+item
+){
+
+return sum +
+Number(item.price || 0) *
+Number(item.quantity || 1);
+
+},0);
+
+
+const grandTotal =
+productTotal +
+DELIVERY_CHARGE;
+
+
+
+/* ======================================
+   ORDER ID
+====================================== */
+
+const orderId =
+"NOON-" +
+Date.now();
+
+
+
+/* ======================================
+   ORDER OBJECT
+====================================== */
 
 const order = {
 
-id:Date.now(),
+id:orderId,
 
 name:name,
 
@@ -327,19 +766,59 @@ phone:phone,
 
 address:address,
 
-items:cart,
+items:cart.map(function(item){
 
-total:total,
+return {
+
+id:item.id,
+
+name:item.name,
+
+price:Number(item.price || 0),
+
+quantity:Number(item.quantity || 1)
+
+};
+
+}),
+
+productTotal:productTotal,
+
+deliveryCharge:DELIVERY_CHARGE,
+
+total:grandTotal,
+
+paymentMethod:paymentMethod,
+
+paymentNumber:"01343873070",
+
+transactionId:transactionId,
 
 status:"Pending",
 
-date:new Date().toLocaleString("bn-BD")
+date:new Date().toLocaleString(
+"bn-BD"
+)
 
 };
 
 
+
+/* ======================================
+   SAVE ORDER
+====================================== */
+
 let orders =
-JSON.parse(localStorage.getItem("noonOrders")) || [];
+JSON.parse(
+localStorage.getItem("noonOrders")
+) || [];
+
+
+if(!Array.isArray(orders)){
+
+orders = [];
+
+}
 
 
 orders.push(order);
@@ -351,26 +830,58 @@ JSON.stringify(orders)
 );
 
 
-localStorage.removeItem("noonCart");
+
+/* ======================================
+   CLEAR CART
+====================================== */
+
+localStorage.removeItem(
+"noonCart"
+);
+
+cart = [];
 
 
-document.getElementById("orderForm").style.display =
+
+/* ======================================
+   SHOW SUCCESS
+====================================== */
+
+document.getElementById(
+"orderFormBox"
+).style.display =
 "none";
 
 
-document.getElementById("success").style.display =
+document.getElementById(
+"successBox"
+).style.display =
 "block";
 
 
-showOrder();
+document.getElementById(
+"successOrderId"
+).innerText =
+orderId;
 
 });
 
 
 
+/* ======================================
+   START
+====================================== */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
 showOrder();
 
+});
+
 </script>
+
 
 </body>
 </html>
