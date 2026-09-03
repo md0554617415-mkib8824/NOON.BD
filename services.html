@@ -1,53 +1,81 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOON.BD - সেবা</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOON.BD - পণ্য</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+*{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #20242a;
-    }
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f7fa;
+  color:#222;
+}
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 15px 20px;
-      font-size: 22px;
-      font-weight: bold;
-    }
+header{
+  background:#111827;
+  color:white;
+  padding:18px 20px;
+  font-size:23px;
+  font-weight:bold;
+}
 
-    .container {
-      padding: 25px 15px;
-      max-width: 700px;
-      margin: auto;
-    }
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:25px 15px;
+}
 
-    .box {
-      background: white;
-      padding: 25px;
-      border-radius: 14px;
-      margin-bottom: 15px;
-    }
+h1{
+  text-align:center;
+}
 
-    button {
-      background: #111827;
-      color: white;
-      border: none;
-      padding: 12px 22px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.product{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.product h2{
+  margin-top:0;
+}
+
+.product button{
+  background:#111827;
+  color:white;
+  border:0;
+  padding:11px 20px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.home{
+  margin-top:25px;
+  background:#111827;
+  color:white;
+  border:0;
+  padding:12px 20px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+@media(max-width:600px){
+  .products{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -56,24 +84,43 @@
 
 <div class="container">
 
-  <div class="box">
-    <h1>NOON.BD সেবা</h1>
-    <p>স্বাগতম! এখানে আপনার প্রয়োজনীয় সেবাগুলো দেখতে পারবেন।</p>
-  </div>
+<h1>🛒 আমাদের পণ্য</h1>
 
-  <div class="box">
-    <h2>অনলাইন সেবা</h2>
-    <p>এখানে আপনার বিভিন্ন অনলাইন সেবা যোগ করা যাবে।</p>
-  </div>
+<div class="products">
 
-  <div class="box">
-    <h2>পণ্য</h2>
-    <p>এখানে আপনার পণ্যগুলো প্রদর্শন করা যাবে।</p>
-  </div>
+<div class="product">
+<h2>পণ্য ১</h2>
+<p>সুন্দর একটি পণ্য</p>
+<p>৳ 500</p>
+<button onclick="location.href='orders.html'">অর্ডার করুন</button>
+</div>
 
-  <button onclick="window.location.href='index.html'">
-    ← হোমে ফিরে যান
-  </button>
+<div class="product">
+<h2>পণ্য ২</h2>
+<p>জনপ্রিয় একটি পণ্য</p>
+<p>৳ 800</p>
+<button onclick="location.href='orders.html'">অর্ডার করুন</button>
+</div>
+
+<div class="product">
+<h2>পণ্য ৩</h2>
+<p>নতুন একটি পণ্য</p>
+<p>৳ 1000</p>
+<button onclick="location.href='orders.html'">অর্ডার করুন</button>
+</div>
+
+<div class="product">
+<h2>পণ্য ৪</h2>
+<p>বিশেষ অফারের পণ্য</p>
+<p>৳ 1200</p>
+<button onclick="location.href='orders.html'">অর্ডার করুন</button>
+</div>
+
+</div>
+
+<button class="home" onclick="location.href='services.html'">
+← সেবায় ফিরে যান
+</button>
 
 </div>
 
