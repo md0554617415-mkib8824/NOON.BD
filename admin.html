@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOON.BD — পণ্য</title>
+
+<title>NOON.BD Admin</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+}
 
 body{
+    margin:0;
     font-family:Arial,"Noto Sans Bengali",sans-serif;
     background:#f5f7fb;
     color:#222;
@@ -18,160 +22,105 @@ header{
     background:#111827;
     color:white;
     text-align:center;
-    padding:18px;
+    padding:22px;
 }
-
-header h1{font-size:30px;margin-bottom:5px}
-header p{font-size:14px}
 
 nav{
     background:white;
-    padding:12px 8px;
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:7px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-    position:sticky;
-    top:0;
-    z-index:10;
+    padding:12px;
+    text-align:center;
+    box-shadow:0 2px 8px #ddd;
 }
 
 nav a{
-    text-decoration:none;
-    color:#111827;
-    font-weight:bold;
+    display:inline-block;
+    margin:4px;
     padding:9px 12px;
+    color:#111827;
+    text-decoration:none;
+    font-weight:bold;
     border-radius:7px;
-    font-size:14px;
 }
 
-nav a:hover,
-nav a.active{
+nav a:hover{
     background:#111827;
     color:white;
 }
 
-.page-title{
-    text-align:center;
-    padding:40px 20px 25px;
-}
-
-.page-title h2{
-    font-size:30px;
-    margin-bottom:10px;
-}
-
-.page-title p{
-    color:#666;
-}
-
-.products{
+.container{
     max-width:1100px;
-    margin:10px auto 50px;
-    padding:0 15px;
+    margin:25px auto;
+    padding:15px;
 }
 
-.product-grid{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-.product-card{
+.box{
     background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-}
-
-.product-image{
-    height:190px;
-    background:#e5e7eb;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:65px;
-}
-
-.product-info{
     padding:20px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 3px 12px #ddd;
 }
 
-.product-info h3{
-    font-size:20px;
-    margin-bottom:8px;
-}
-
-.description{
-    color:#666;
-    font-size:14px;
-    line-height:1.6;
-    min-height:44px;
-}
-
-.price{
-    font-size:22px;
-    font-weight:bold;
-    margin:15px 0;
-}
-
-.stock{
-    color:#166534;
-    font-size:14px;
-    margin-bottom:12px;
-}
-
-.order-btn{
-    width:100%;
-    padding:12px;
+button{
+    padding:10px 15px;
     border:0;
-    border-radius:8px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:4px;
+}
+
+.add{
     background:#111827;
     color:white;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
 }
 
-.order-btn:hover{
+.edit{
     background:#2563eb;
+    color:white;
+}
+
+.delete{
+    background:#dc2626;
+    color:white;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:11px;
+    margin:6px 0 12px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:15px;
+}
+
+.product{
+    border:1px solid #ddd;
+    padding:15px;
+    margin:10px 0;
+    border-radius:10px;
+    background:#fafafa;
+}
+
+.order{
+    border:1px solid #ddd;
+    padding:15px;
+    margin:10px 0;
+    border-radius:10px;
 }
 
 .empty{
     text-align:center;
-    background:white;
-    padding:40px;
-    border-radius:12px;
     color:#777;
+    padding:20px;
 }
 
 footer{
     background:#111827;
     color:white;
     text-align:center;
-    padding:25px 15px;
-}
-
-footer p{
-    margin:5px;
-    font-size:14px;
-}
-
-@media(max-width:600px){
-
-    header h1{font-size:25px}
-
-    nav{
-        justify-content:flex-start;
-        overflow-x:auto;
-        flex-wrap:nowrap;
-    }
-
-    nav a{white-space:nowrap}
-
-    .page-title h2{font-size:27px}
+    padding:25px;
 }
 </style>
 </head>
@@ -179,46 +128,84 @@ footer p{
 <body>
 
 <header>
-    <h1>NOON.BD</h1>
-    <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
+    <h1>🔐 NOON.BD</h1>
+    <p>Admin Panel</p>
 </header>
 
 <nav>
     <a href="index.html">🏠 হোম</a>
     <a href="services.html">🛠️ সেবা</a>
-    <a href="products.html" class="active">🛍️ পণ্য</a>
+    <a href="products.html">🛍️ পণ্য</a>
     <a href="orders.html">📦 অর্ডার</a>
     <a href="delivery.html">🚚 ডেলিভারি</a>
     <a href="contact.html">📞 যোগাযোগ</a>
-    <a href="admin.html">🔐 অ্যাডমিন</a>
 </nav>
 
-<section class="page-title">
-    <h2>🛍️ আমাদের পণ্য</h2>
-    <p>আপনার পছন্দের পণ্য নির্বাচন করে অর্ডার করুন।</p>
-</section>
+<div class="container">
 
-<section class="products">
+<!-- PRODUCT -->
 
-    <div id="productGrid" class="product-grid"></div>
+<div class="box">
 
-</section>
+    <h2>🛍️ পণ্য ব্যবস্থাপনা</h2>
+
+    <button
+        class="add"
+        onclick="addProduct()">
+        ➕ নতুন পণ্য
+    </button>
+
+    <div id="products">
+        <div class="empty">
+            পণ্য লোড হচ্ছে...
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ORDERS -->
+
+<div class="box">
+
+    <h2>📦 অর্ডার</h2>
+
+    <div id="orders">
+        <div class="empty">
+            অর্ডার লোড হচ্ছে...
+        </div>
+    </div>
+
+</div>
+
+
+<!-- MESSAGES -->
+
+<div class="box">
+
+    <h2>💬 মেসেজ</h2>
+
+    <div id="messages">
+        <div class="empty">
+            মেসেজ লোড হচ্ছে...
+        </div>
+    </div>
+
+</div>
+
+</div>
 
 <footer>
-    <p><strong>NOON.BD</strong></p>
-    <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
-    <p>© 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত</p>
+    <p>NOON.BD Admin Panel</p>
+    <p>© 2026 NOON.BD</p>
 </footer>
+
 
 <script>
 
-/*
-==================================================
-NOON.BD PRODUCT SYSTEM
-==================================================
-*/
-
-/* ডিফল্ট পণ্য */
+/* =====================================
+   DEFAULT PRODUCTS
+===================================== */
 
 const defaultProducts = [
 
@@ -226,166 +213,209 @@ const defaultProducts = [
         id:1,
         name:"স্মার্টফোন",
         price:15000,
-        icon:"📱",
-        description:"উন্নত মানের স্মার্টফোন।",
-        stock:10
+        stock:10,
+        icon:"📱"
     },
 
     {
         id:2,
-        name:"ওয়্যারলেস হেডফোন",
+        name:"হেডফোন",
         price:1200,
-        icon:"🎧",
-        description:"ভালো সাউন্ড কোয়ালিটির ওয়্যারলেস হেডফোন।",
-        stock:15
+        stock:15,
+        icon:"🎧"
     },
 
     {
         id:3,
         name:"স্মার্ট ওয়াচ",
         price:2500,
-        icon:"⌚",
-        description:"আধুনিক ডিজাইনের স্মার্ট ওয়াচ।",
-        stock:8
-    },
-
-    {
-        id:4,
-        name:"টি-শার্ট",
-        price:600,
-        icon:"👕",
-        description:"আরামদায়ক ও সুন্দর ডিজাইনের টি-শার্ট।",
-        stock:20
-    },
-
-    {
-        id:5,
-        name:"স্পোর্টস জুতা",
-        price:1800,
-        icon:"👟",
-        description:"দৈনন্দিন ব্যবহার ও খেলাধুলার জন্য উপযোগী।",
-        stock:12
-    },
-
-    {
-        id:6,
-        name:"ব্যাকপ্যাক",
-        price:900,
-        icon:"🎒",
-        description:"স্কুল, কলেজ ও ভ্রমণের জন্য ব্যবহারযোগ্য।",
-        stock:18
+        stock:8,
+        icon:"⌚"
     }
 
 ];
 
 
-/* =========================================
-   পণ্য LocalStorage-এ আছে কিনা পরীক্ষা
-========================================= */
+/* =====================================
+   PRODUCT STORAGE
+===================================== */
 
-if(!localStorage.getItem("noonProducts")){
+function getProducts(){
 
-    localStorage.setItem(
-        "noonProducts",
-        JSON.stringify(defaultProducts)
-    );
+    let data =
+        localStorage.getItem("noonProducts");
+
+    if(!data){
+
+        localStorage.setItem(
+            "noonProducts",
+            JSON.stringify(defaultProducts)
+        );
+
+        return defaultProducts;
+    }
+
+    try{
+
+        return JSON.parse(data);
+
+    }catch(error){
+
+        localStorage.setItem(
+            "noonProducts",
+            JSON.stringify(defaultProducts)
+        );
+
+        return defaultProducts;
+    }
 
 }
 
 
-/* =========================================
-   পণ্য দেখানো
-========================================= */
+/* =====================================
+   SHOW PRODUCTS
+===================================== */
 
 function loadProducts(){
 
     const products =
-        JSON.parse(
-            localStorage.getItem("noonProducts") || "[]"
-        );
+        getProducts();
 
-    const grid =
-        document.getElementById("productGrid");
+    const box =
+        document.getElementById("products");
 
 
     if(products.length === 0){
 
-        grid.innerHTML =
-            '<div class="empty">বর্তমানে কোনো পণ্য নেই।</div>';
+        box.innerHTML =
+            '<div class="empty">কোনো পণ্য নেই।</div>';
 
         return;
-
     }
 
 
-    grid.innerHTML = products.map(product => `
+    box.innerHTML =
+        products.map(
+            product => `
 
-        <div class="product-card">
+        <div class="product">
 
-            <div class="product-image">
-                ${escapeHTML(product.icon || "🛍️")}
-            </div>
+            <h3>
+                ${product.icon || "🛍️"}
+                ${escapeText(product.name)}
+            </h3>
 
-            <div class="product-info">
+            <p>
+                💰 দাম:
+                ৳${Number(product.price).toLocaleString()}
+            </p>
 
-                <h3>
-                    ${escapeHTML(product.name)}
-                </h3>
+            <p>
+                📦 স্টক:
+                ${product.stock}
+            </p>
 
-                <p class="description">
-                    ${escapeHTML(product.description || "")}
-                </p>
+            <button
+                class="edit"
+                onclick="editProduct(${product.id})">
 
-                <div class="price">
-                    ৳ ${Number(product.price).toLocaleString("en-BD")}
-                </div>
+                ✏️ Edit
 
-                <div class="stock">
-                    ${
-                        Number(product.stock) > 0
-                        ? "✅ স্টক আছে: " + product.stock
-                        : "❌ স্টক শেষ"
-                    }
-                </div>
+            </button>
 
-                <button
-                    class="order-btn"
-                    ${
-                        Number(product.stock) <= 0
-                        ? "disabled"
-                        : ""
-                    }
-                    onclick="orderProduct(
-                        ${product.id}
-                    )">
+            <button
+                class="delete"
+                onclick="deleteProduct(${product.id})">
 
-                    ${
-                        Number(product.stock) > 0
-                        ? "🛒 অর্ডার করুন"
-                        : "স্টক শেষ"
-                    }
+                🗑️ Delete
 
-                </button>
-
-            </div>
+            </button>
 
         </div>
 
-    `).join("");
+    `
+        ).join("");
 
 }
 
 
-/* =========================================
-   অর্ডার
-========================================= */
+/* =====================================
+   ADD PRODUCT
+===================================== */
 
-function orderProduct(id){
+function addProduct(){
+
+    const name =
+        prompt("পণ্যের নাম লিখুন:");
+
+    if(!name){
+        return;
+    }
+
+
+    const price =
+        prompt("পণ্যের দাম লিখুন:");
+
+    if(price === null){
+        return;
+    }
+
+
+    const stock =
+        prompt("স্টক সংখ্যা লিখুন:");
+
+    if(stock === null){
+        return;
+    }
+
+
+    const icon =
+        prompt(
+            "পণ্যের Emoji দিন:",
+            "🛍️"
+        ) || "🛍️";
+
 
     const products =
-        JSON.parse(
-            localStorage.getItem("noonProducts") || "[]"
-        );
+        getProducts();
+
+
+    products.push({
+
+        id:Date.now(),
+
+        name:name,
+
+        price:Number(price) || 0,
+
+        stock:Number(stock) || 0,
+
+        icon:icon
+
+    });
+
+
+    localStorage.setItem(
+        "noonProducts",
+        JSON.stringify(products)
+    );
+
+
+    loadProducts();
+
+    alert("✅ পণ্য যোগ হয়েছে।");
+
+}
+
+
+/* =====================================
+   EDIT PRODUCT
+===================================== */
+
+function editProduct(id){
+
+    const products =
+        getProducts();
 
 
     const product =
@@ -400,52 +430,243 @@ function orderProduct(id){
         alert("পণ্য পাওয়া যায়নি।");
 
         return;
-
     }
 
 
-    if(Number(product.stock) <= 0){
+    const name =
+        prompt(
+            "পণ্যের নাম:",
+            product.name
+        );
 
-        alert("এই পণ্যটি বর্তমানে স্টকে নেই।");
 
+    if(name === null){
         return;
-
     }
 
 
-    /* নির্বাচিত পণ্যের তথ্য */
+    const price =
+        prompt(
+            "দাম:",
+            product.price
+        );
+
+
+    if(price === null){
+        return;
+    }
+
+
+    const stock =
+        prompt(
+            "স্টক:",
+            product.stock
+        );
+
+
+    if(stock === null){
+        return;
+    }
+
+
+    product.name = name;
+
+    product.price =
+        Number(price) || 0;
+
+    product.stock =
+        Number(stock) || 0;
+
 
     localStorage.setItem(
-        "selectedProduct",
-        product.name
+        "noonProducts",
+        JSON.stringify(products)
     );
 
 
-    localStorage.setItem(
-        "selectedPrice",
-        product.price
-    );
+    loadProducts();
 
-
-    localStorage.setItem(
-        "selectedProductId",
-        product.id
-    );
-
-
-    /* অর্ডার পেজ */
-
-    window.location.href =
-        "orders.html";
+    alert("✅ পণ্য আপডেট হয়েছে।");
 
 }
 
 
-/* =========================================
-   নিরাপদভাবে লেখা
-========================================= */
+/* =====================================
+   DELETE PRODUCT
+===================================== */
 
-function escapeHTML(value){
+function deleteProduct(id){
+
+    if(!confirm(
+        "এই পণ্যটি মুছে ফেলবেন?"
+    )){
+
+        return;
+    }
+
+
+    let products =
+        getProducts();
+
+
+    products =
+        products.filter(
+            product =>
+            Number(product.id) !== Number(id)
+        );
+
+
+    localStorage.setItem(
+        "noonProducts",
+        JSON.stringify(products)
+    );
+
+
+    loadProducts();
+
+}
+
+
+/* =====================================
+   ORDERS
+===================================== */
+
+function loadOrders(){
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem("orders") || "[]"
+        );
+
+
+    const box =
+        document.getElementById("orders");
+
+
+    if(orders.length === 0){
+
+        box.innerHTML =
+            '<div class="empty">কোনো অর্ডার নেই।</div>';
+
+        return;
+    }
+
+
+    box.innerHTML =
+        orders.map(
+            (order,index) => `
+
+        <div class="order">
+
+            <h3>
+                📦 অর্ডার #${index + 1}
+            </h3>
+
+            <p>
+                🛍️ পণ্য:
+                ${escapeText(order.product)}
+            </p>
+
+            <p>
+                💰 মূল্য:
+                ৳${escapeText(order.price)}
+            </p>
+
+            <p>
+                👤 নাম:
+                ${escapeText(order.name)}
+            </p>
+
+            <p>
+                📞 মোবাইল:
+                ${escapeText(order.phone)}
+            </p>
+
+            <p>
+                📍 ঠিকানা:
+                ${escapeText(order.address)}
+            </p>
+
+            <p>
+                💳 পেমেন্ট:
+                ${escapeText(order.payment)}
+            </p>
+
+            <p>
+                📅 ${escapeText(order.date)}
+            </p>
+
+        </div>
+
+    `
+        ).join("");
+
+}
+
+
+/* =====================================
+   MESSAGES
+===================================== */
+
+function loadMessages(){
+
+    const messages =
+        JSON.parse(
+            localStorage.getItem("messages") || "[]"
+        );
+
+
+    const box =
+        document.getElementById("messages");
+
+
+    if(messages.length === 0){
+
+        box.innerHTML =
+            '<div class="empty">কোনো মেসেজ নেই।</div>';
+
+        return;
+    }
+
+
+    box.innerHTML =
+        messages
+        .slice()
+        .reverse()
+        .map(
+            message => `
+
+        <div class="order">
+
+            <h3>
+                👤 ${escapeText(message.name)}
+            </h3>
+
+            <p>
+                📞 ${escapeText(message.phone)}
+            </p>
+
+            <p>
+                💬 ${escapeText(message.message)}
+            </p>
+
+            <p>
+                📅 ${escapeText(message.date)}
+            </p>
+
+        </div>
+
+    `
+        ).join("");
+
+}
+
+
+/* =====================================
+   SAFE TEXT
+===================================== */
+
+function escapeText(value){
 
     return String(value ?? "")
         .replace(/&/g,"&amp;")
@@ -457,11 +678,15 @@ function escapeHTML(value){
 }
 
 
-/* =========================================
-   শুরু
-========================================= */
+/* =====================================
+   START
+===================================== */
 
 loadProducts();
+
+loadOrders();
+
+loadMessages();
 
 </script>
 
