@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="bn"> 
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOON.BD - সেবা</title>
+<title>NOON.BD - পণ্য</title>
 
 <style>
-*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial,sans-serif;
@@ -25,44 +24,36 @@ header{
   margin:auto;
   padding:25px 15px;
 }
-.welcome{
-  background:white;
-  padding:25px;
-  border-radius:16px;
-  text-align:center;
-  margin-bottom:20px;
-}
-.services{
+h1{text-align:center}
+.products{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:15px;
 }
-.service{
+.product{
   background:white;
-  padding:22px;
-  border-radius:16px;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
   box-shadow:0 3px 10px rgba(0,0,0,.06);
 }
-.service h2{margin-top:0}
-.service button{
+.product button{
   background:#111827;
   color:white;
   border:0;
-  padding:10px 18px;
+  padding:11px 20px;
   border-radius:8px;
-  cursor:pointer;
 }
 .home{
   margin-top:25px;
   background:#111827;
   color:white;
   border:0;
-  padding:13px 22px;
-  border-radius:9px;
-  font-size:16px;
+  padding:12px 20px;
+  border-radius:8px;
 }
 @media(max-width:600px){
-  .services{grid-template-columns:1fr}
+  .products{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -73,41 +64,42 @@ header{
 
 <div class="container">
 
-<div class="welcome">
-<h1>NOON.BD সেবা</h1>
-<p>আপনার প্রয়োজনীয় সেবা বেছে নিন।</p>
+<h1>🛒 আমাদের পণ্য</h1>
+
+<div class="products">
+
+<div class="product">
+<h2>পণ্য ১</h2>
+<p>সুন্দর একটি পণ্য</p>
+<p>৳ 500</p>
+<button>অর্ডার করুন</button>
 </div>
 
-<div class="services">
-
-<div class="service">
-<h2>🛒 পণ্য</h2>
-<p>আমাদের বিভিন্ন পণ্য দেখুন।</p>
-<button onclick="location.href='products.html'">দেখুন</button>
+<div class="product">
+<h2>পণ্য ২</h2>
+<p>জনপ্রিয় একটি পণ্য</p>
+<p>৳ 800</p>
+<button>অর্ডার করুন</button>
 </div>
 
-<div class="service">
-<h2>📦 অর্ডার</h2>
-<p>আপনার অর্ডারের তথ্য দেখুন।</p>
-<button onclick="location.href='orders.html'">দেখুন</button>
+<div class="product">
+<h2>পণ্য ৩</h2>
+<p>নতুন একটি পণ্য</p>
+<p>৳ 1000</p>
+<button>অর্ডার করুন</button>
 </div>
 
-<div class="service">
-<h2>🚚 ডেলিভারি</h2>
-<p>ডেলিভারি সংক্রান্ত তথ্য জানুন।</p>
-<button onclick="location.href='delivery.html'">দেখুন</button>
-</div>
-
-<div class="service">
-<h2>☎️ যোগাযোগ</h2>
-<p>আমাদের সাথে যোগাযোগ করুন।</p>
-<button onclick="location.href='contact.html'">যোগাযোগ</button>
+<div class="product">
+<h2>পণ্য ৪</h2>
+<p>বিশেষ অফারের পণ্য</p>
+<p>৳ 1200</p>
+<button>অর্ডার করুন</button>
 </div>
 
 </div>
 
-<button class="home" onclick="location.href='index.html'">
-← হোমে ফিরে যান
+<button class="home" onclick="location.href='services.html'">
+← সেবায় ফিরে যান
 </button>
 
 </div>
