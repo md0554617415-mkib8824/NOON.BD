@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>NOON.BD — Admin</title>
+<style>
+body{font-family:Arial;margin:0;background:#f5f7fa}header{background:#111827;color:white;padding:18px;text-align:center}nav{text-align:center;background:white;padding:14px}nav a{margin:8px;color:#111827;text-decoration:none;font-weight:bold}.box{margin:25px auto;max-width:900px;background:white;padding:20px;border-radius:12px;box-shadow:0 2px 10px #ddd}.order{border:1px solid #ddd;padding:15px;margin:12px 0;border-radius:8px}button{background:#b91c1c;color:white;border:0;padding:10px 15px;border-radius:7px}
+</style></head>
+<body>
+<header><h1>NOON.BD Admin Panel</h1></header>
+<nav><a href="index.html">হোম</a><a href="products.html">পণ্য</a><a href="orders.html">অর্ডার</a></nav>
+<div class="box">
+<h2>📦 সকল অর্ডার</h2>
+<div id="orders"></div>
+<button onclick="clearOrders()">সব অর্ডার মুছুন</button>
+</div>
+
+<script>
+function showOrders(){
+let orders=JSON.parse(localStorage.getItem("orders")||"[]");
+let box=document.getElementById("orders");
+if(!orders.length){
+box.innerHTML="<p>কোনো অর্ডার নেই।</p>";
+return;
+}
+box.innerHTML=orders.map((o,i)=>`
+<div class="order">
+<b>অর্ডার #${i+1}</b>
+<p>পণ্য: ${o.product}</p>
+<p>মূল্য: ৳${o.price}</p>
+<p>নাম: ${o.name}</p>
+<p>মোবাইল: ${o.phone}</p>
+<p>ঠিকানা: ${o.address}</p>
+<p>সময়: ${o.time}</p>
+</div>`).join("");
+}
+function clearOrders(){
+if(confirm("সব অর্ডার মুছে ফেলবেন?")){
+localStorage.removeItem("orders");
+showOrders();
+}
+}
+showOrders();
+</script>
+</body></html>
