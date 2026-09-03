@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>NOON.BD — Admin Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOON.BD — পণ্য</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
     font-family:Arial,"Noto Sans Bengali",sans-serif;
@@ -23,26 +14,15 @@ body{
     color:#222;
 }
 
-/* Header */
-
 header{
     background:#111827;
     color:white;
-    padding:20px;
     text-align:center;
+    padding:18px;
 }
 
-header h1{
-    font-size:28px;
-    margin-bottom:5px;
-}
-
-header p{
-    font-size:14px;
-    opacity:.9;
-}
-
-/* Navigation */
+header h1{font-size:30px;margin-bottom:5px}
+header p{font-size:14px}
 
 nav{
     background:white;
@@ -52,6 +32,9 @@ nav{
     flex-wrap:wrap;
     gap:7px;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:10;
 }
 
 nav a{
@@ -69,197 +52,100 @@ nav a.active{
     color:white;
 }
 
-/* Container */
+.page-title{
+    text-align:center;
+    padding:40px 20px 25px;
+}
 
-.container{
+.page-title h2{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.page-title p{
+    color:#666;
+}
+
+.products{
     max-width:1100px;
-    margin:30px auto 50px;
+    margin:10px auto 50px;
     padding:0 15px;
 }
 
-/* Dashboard */
-
-.dashboard{
+.product-grid{
     display:grid;
     grid-template-columns:
-    repeat(auto-fit,minmax(200px,1fr));
-
-    gap:18px;
-    margin-bottom:25px;
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 }
 
-.stat{
+.product-card{
     background:white;
-    padding:22px;
-    border-radius:14px;
-    box-shadow:0 4px 15px rgba(0,0,0,.07);
-    text-align:center;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
-.stat-icon{
-    font-size:35px;
+.product-image{
+    height:190px;
+    background:#e5e7eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:65px;
+}
+
+.product-info{
+    padding:20px;
+}
+
+.product-info h3{
+    font-size:20px;
     margin-bottom:8px;
 }
 
-.stat-number{
-    font-size:28px;
-    font-weight:bold;
-}
-
-.stat-title{
+.description{
     color:#666;
-    margin-top:5px;
+    font-size:14px;
+    line-height:1.6;
+    min-height:44px;
 }
 
-/* Section */
-
-.section{
-    background:white;
-    padding:22px;
-    border-radius:14px;
-    box-shadow:0 4px 15px rgba(0,0,0,.07);
-    margin-bottom:25px;
-}
-
-.section-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    margin-bottom:18px;
-}
-
-.section-header h2{
+.price{
     font-size:22px;
-}
-
-/* Buttons */
-
-.btn{
-    border:0;
-    padding:10px 15px;
-    border-radius:7px;
     font-weight:bold;
-    cursor:pointer;
+    margin:15px 0;
 }
 
-.refresh{
+.stock{
+    color:#166534;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.order-btn{
+    width:100%;
+    padding:12px;
+    border:0;
+    border-radius:8px;
     background:#111827;
     color:white;
-}
-
-.delete{
-    background:#dc2626;
-    color:white;
-}
-
-.delete-small{
-    background:#dc2626;
-    color:white;
-    padding:7px 10px;
-    border:0;
-    border-radius:6px;
+    font-size:15px;
+    font-weight:bold;
     cursor:pointer;
 }
 
-/* Orders */
-
-.order{
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-    padding:18px;
-    margin-bottom:14px;
-    background:#fafafa;
+.order-btn:hover{
+    background:#2563eb;
 }
-
-.order:last-child{
-    margin-bottom:0;
-}
-
-.order-top{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:12px;
-}
-
-.order-id{
-    font-weight:bold;
-}
-
-.status{
-    background:#fef3c7;
-    color:#92400e;
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.order-info{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(200px,1fr));
-
-    gap:8px;
-
-    color:#555;
-
-    line-height:1.6;
-}
-
-.order-actions{
-    margin-top:15px;
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-select{
-    padding:8px;
-    border:1px solid #ccc;
-    border-radius:6px;
-}
-
-/* Messages */
-
-.message{
-    border:1px solid #e5e7eb;
-    background:#fafafa;
-    padding:17px;
-    border-radius:10px;
-    margin-bottom:12px;
-}
-
-.message:last-child{
-    margin-bottom:0;
-}
-
-.message strong{
-    display:block;
-    margin-bottom:5px;
-}
-
-.message p{
-    color:#555;
-    line-height:1.6;
-}
-
-.message-date{
-    font-size:12px;
-    color:#888;
-    margin-top:7px;
-}
-
-/* Empty */
 
 .empty{
     text-align:center;
+    background:white;
+    padding:40px;
+    border-radius:12px;
     color:#777;
-    padding:30px 10px;
 }
-
-/* Footer */
 
 footer{
     background:#111827;
@@ -269,17 +155,13 @@ footer{
 }
 
 footer p{
-    margin:5px 0;
+    margin:5px;
     font-size:14px;
 }
 
-/* Mobile */
-
 @media(max-width:600px){
 
-    header h1{
-        font-size:24px;
-    }
+    header h1{font-size:25px}
 
     nav{
         justify-content:flex-start;
@@ -287,450 +169,201 @@ footer p{
         flex-wrap:nowrap;
     }
 
-    nav a{
-        white-space:nowrap;
-    }
+    nav a{white-space:nowrap}
 
-    .container{
-        margin-top:20px;
-    }
-
-    .section{
-        padding:17px;
-    }
-
-    .section-header{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .order-top{
-        flex-direction:column;
-    }
-
+    .page-title h2{font-size:27px}
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- Header -->
-
 <header>
-
-    <h1>🔐 NOON.BD Admin Panel</h1>
-
-    <p>
-        অর্ডার ও গ্রাহকের মেসেজ ব্যবস্থাপনা
-    </p>
-
+    <h1>NOON.BD</h1>
+    <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
 </header>
 
-
-<!-- Navigation -->
-
 <nav>
-
-    <a href="index.html">
-        🏠 হোম
-    </a>
-
-    <a href="services.html">
-        🛠️ সেবা
-    </a>
-
-    <a href="products.html">
-        🛍️ পণ্য
-    </a>
-
-    <a href="orders.html">
-        📦 অর্ডার
-    </a>
-
-    <a href="delivery.html">
-        🚚 ডেলিভারি
-    </a>
-
-    <a href="contact.html">
-        📞 যোগাযোগ
-    </a>
-
-    <a href="admin.html"
-       class="active">
-        🔐 অ্যাডমিন
-    </a>
-
+    <a href="index.html">🏠 হোম</a>
+    <a href="services.html">🛠️ সেবা</a>
+    <a href="products.html" class="active">🛍️ পণ্য</a>
+    <a href="orders.html">📦 অর্ডার</a>
+    <a href="delivery.html">🚚 ডেলিভারি</a>
+    <a href="contact.html">📞 যোগাযোগ</a>
+    <a href="admin.html">🔐 অ্যাডমিন</a>
 </nav>
 
+<section class="page-title">
+    <h2>🛍️ আমাদের পণ্য</h2>
+    <p>আপনার পছন্দের পণ্য নির্বাচন করে অর্ডার করুন।</p>
+</section>
 
-<!-- Main -->
+<section class="products">
 
-<main class="container">
+    <div id="productGrid" class="product-grid"></div>
 
-
-    <!-- Dashboard -->
-
-    <section class="dashboard">
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                📦
-            </div>
-
-            <div
-                id="totalOrders"
-                class="stat-number">
-                0
-            </div>
-
-            <div class="stat-title">
-                মোট অর্ডার
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                🆕
-            </div>
-
-            <div
-                id="newOrders"
-                class="stat-number">
-                0
-            </div>
-
-            <div class="stat-title">
-                নতুন অর্ডার
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                💬
-            </div>
-
-            <div
-                id="totalMessages"
-                class="stat-number">
-                0
-            </div>
-
-            <div class="stat-title">
-                মেসেজ
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-    <!-- Orders -->
-
-    <section class="section">
-
-        <div class="section-header">
-
-            <h2>
-                📦 অর্ডারসমূহ
-            </h2>
-
-            <div>
-
-                <button
-                    class="btn refresh"
-                    onclick="loadData()">
-                    🔄 Refresh
-                </button>
-
-                <button
-                    class="btn delete"
-                    onclick="deleteAllOrders()">
-                    🗑️ সব মুছুন
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div id="ordersList">
-
-            <div class="empty">
-                অর্ডার লোড হচ্ছে...
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Messages -->
-
-    <section class="section">
-
-        <div class="section-header">
-
-            <h2>
-                💬 গ্রাহকের মেসেজ
-            </h2>
-
-            <button
-                class="btn delete"
-                onclick="deleteAllMessages()">
-
-                🗑️ সব মুছুন
-
-            </button>
-
-        </div>
-
-
-        <div id="messagesList">
-
-            <div class="empty">
-                মেসেজ লোড হচ্ছে...
-            </div>
-
-        </div>
-
-    </section>
-
-
-</main>
-
-
-<!-- Footer -->
+</section>
 
 <footer>
-
-    <p>
-        <strong>NOON.BD</strong>
-    </p>
-
-    <p>
-        Admin Panel
-    </p>
-
-    <p>
-        © 2026 NOON.BD
-    </p>
-
+    <p><strong>NOON.BD</strong></p>
+    <p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
+    <p>© 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত</p>
 </footer>
-
 
 <script>
 
-/* ===================================
-   DATA LOAD
-=================================== */
+/*
+==================================================
+NOON.BD PRODUCT SYSTEM
+==================================================
+*/
 
-function getOrders(){
+/* ডিফল্ট পণ্য */
 
-    return JSON.parse(
-        localStorage.getItem("orders") || "[]"
+const defaultProducts = [
+
+    {
+        id:1,
+        name:"স্মার্টফোন",
+        price:15000,
+        icon:"📱",
+        description:"উন্নত মানের স্মার্টফোন।",
+        stock:10
+    },
+
+    {
+        id:2,
+        name:"ওয়্যারলেস হেডফোন",
+        price:1200,
+        icon:"🎧",
+        description:"ভালো সাউন্ড কোয়ালিটির ওয়্যারলেস হেডফোন।",
+        stock:15
+    },
+
+    {
+        id:3,
+        name:"স্মার্ট ওয়াচ",
+        price:2500,
+        icon:"⌚",
+        description:"আধুনিক ডিজাইনের স্মার্ট ওয়াচ।",
+        stock:8
+    },
+
+    {
+        id:4,
+        name:"টি-শার্ট",
+        price:600,
+        icon:"👕",
+        description:"আরামদায়ক ও সুন্দর ডিজাইনের টি-শার্ট।",
+        stock:20
+    },
+
+    {
+        id:5,
+        name:"স্পোর্টস জুতা",
+        price:1800,
+        icon:"👟",
+        description:"দৈনন্দিন ব্যবহার ও খেলাধুলার জন্য উপযোগী।",
+        stock:12
+    },
+
+    {
+        id:6,
+        name:"ব্যাকপ্যাক",
+        price:900,
+        icon:"🎒",
+        description:"স্কুল, কলেজ ও ভ্রমণের জন্য ব্যবহারযোগ্য।",
+        stock:18
+    }
+
+];
+
+
+/* =========================================
+   পণ্য LocalStorage-এ আছে কিনা পরীক্ষা
+========================================= */
+
+if(!localStorage.getItem("noonProducts")){
+
+    localStorage.setItem(
+        "noonProducts",
+        JSON.stringify(defaultProducts)
     );
 
 }
 
 
-function getMessages(){
+/* =========================================
+   পণ্য দেখানো
+========================================= */
 
-    return JSON.parse(
-        localStorage.getItem("messages") || "[]"
-    );
+function loadProducts(){
 
-}
-
-
-/* ===================================
-   LOAD DATA
-=================================== */
-
-function loadData(){
-
-    const orders =
-        getOrders();
-
-    const messages =
-        getMessages();
-
-
-    /* Statistics */
-
-    document.getElementById(
-        "totalOrders"
-    ).textContent =
-        orders.length;
-
-
-    const newCount =
-        orders.filter(
-            order =>
-            !order.status ||
-            order.status === "নতুন"
-        ).length;
-
-
-    document.getElementById(
-        "newOrders"
-    ).textContent =
-        newCount;
-
-
-    document.getElementById(
-        "totalMessages"
-    ).textContent =
-        messages.length;
-
-
-    /* Orders */
-
-    showOrders(orders);
-
-
-    /* Messages */
-
-    showMessages(messages);
-
-}
-
-
-/* ===================================
-   SHOW ORDERS
-=================================== */
-
-function showOrders(orders){
-
-    const box =
-        document.getElementById(
-            "ordersList"
+    const products =
+        JSON.parse(
+            localStorage.getItem("noonProducts") || "[]"
         );
 
+    const grid =
+        document.getElementById("productGrid");
 
-    if(orders.length === 0){
 
-        box.innerHTML =
-            '<div class="empty">কোনো অর্ডার নেই।</div>';
+    if(products.length === 0){
+
+        grid.innerHTML =
+            '<div class="empty">বর্তমানে কোনো পণ্য নেই।</div>';
 
         return;
 
     }
 
 
-    box.innerHTML =
-        orders.map(
-            (order,index) => `
+    grid.innerHTML = products.map(product => `
 
-        <div class="order">
+        <div class="product-card">
 
-            <div class="order-top">
-
-                <div class="order-id">
-
-                    📦 অর্ডার #${index + 1}
-
-                </div>
-
-                <div class="status">
-
-                    ${order.status || "নতুন"}
-
-                </div>
-
+            <div class="product-image">
+                ${escapeHTML(product.icon || "🛍️")}
             </div>
 
+            <div class="product-info">
 
-            <div class="order-info">
+                <h3>
+                    ${escapeHTML(product.name)}
+                </h3>
 
-                <div>
-                    <strong>পণ্য:</strong>
-                    ${safe(order.product)}
+                <p class="description">
+                    ${escapeHTML(product.description || "")}
+                </p>
+
+                <div class="price">
+                    ৳ ${Number(product.price).toLocaleString("en-BD")}
                 </div>
 
-                <div>
-                    <strong>মূল্য:</strong>
-                    ৳ ${safe(order.price)}
+                <div class="stock">
+                    ${
+                        Number(product.stock) > 0
+                        ? "✅ স্টক আছে: " + product.stock
+                        : "❌ স্টক শেষ"
+                    }
                 </div>
-
-                <div>
-                    <strong>নাম:</strong>
-                    ${safe(order.name)}
-                </div>
-
-                <div>
-                    <strong>মোবাইল:</strong>
-                    ${safe(order.phone)}
-                </div>
-
-                <div>
-                    <strong>ঠিকানা:</strong>
-                    ${safe(order.address)}
-                </div>
-
-                <div>
-                    <strong>পেমেন্ট:</strong>
-                    ${safe(order.payment)}
-                </div>
-
-                <div>
-                    <strong>সময়:</strong>
-                    ${safe(order.date)}
-                </div>
-
-            </div>
-
-
-            <div class="order-actions">
-
-                <select
-                    onchange="changeStatus(${order.id},this.value)">
-
-                    <option value="নতুন"
-                        ${order.status==="নতুন" ? "selected":""}>
-                        নতুন
-                    </option>
-
-                    <option value="প্রস্তুত হচ্ছে"
-                        ${order.status==="প্রস্তুত হচ্ছে" ? "selected":""}>
-                        প্রস্তুত হচ্ছে
-                    </option>
-
-                    <option value="ডেলিভারিতে"
-                        ${order.status==="ডেলিভারিতে" ? "selected":""}>
-                        ডেলিভারিতে
-                    </option>
-
-                    <option value="সম্পন্ন"
-                        ${order.status==="সম্পন্ন" ? "selected":""}>
-                        সম্পন্ন
-                    </option>
-
-                    <option value="বাতিল"
-                        ${order.status==="বাতিল" ? "selected":""}>
-                        বাতিল
-                    </option>
-
-                </select>
-
 
                 <button
-                    class="delete-small"
-                    onclick="deleteOrder(${order.id})">
+                    class="order-btn"
+                    ${
+                        Number(product.stock) <= 0
+                        ? "disabled"
+                        : ""
+                    }
+                    onclick="orderProduct(
+                        ${product.id}
+                    )">
 
-                    🗑️ অর্ডার মুছুন
+                    ${
+                        Number(product.stock) > 0
+                        ? "🛒 অর্ডার করুন"
+                        : "স্টক শেষ"
+                    }
 
                 </button>
 
@@ -738,231 +371,83 @@ function showOrders(orders){
 
         </div>
 
-    `
-        ).join("");
+    `).join("");
 
 }
 
 
-/* ===================================
-   SHOW MESSAGES
-=================================== */
+/* =========================================
+   অর্ডার
+========================================= */
 
-function showMessages(messages){
+function orderProduct(id){
 
-    const box =
-        document.getElementById(
-            "messagesList"
+    const products =
+        JSON.parse(
+            localStorage.getItem("noonProducts") || "[]"
         );
 
 
-    if(messages.length === 0){
-
-        box.innerHTML =
-            '<div class="empty">কোনো মেসেজ নেই।</div>';
-
-        return;
-
-    }
-
-
-    box.innerHTML =
-        messages
-        .slice()
-        .reverse()
-        .map(
-            (message,index) => `
-
-        <div class="message">
-
-            <strong>
-                👤 ${safe(message.name)}
-            </strong>
-
-            <p>
-                📞 ${safe(message.phone)}
-            </p>
-
-            <p>
-                💬 ${safe(message.message)}
-            </p>
-
-            <div class="message-date">
-
-                ${safe(message.date)}
-
-            </div>
-
-        </div>
-
-    `
-        ).join("");
-
-}
-
-
-/* ===================================
-   CHANGE ORDER STATUS
-=================================== */
-
-function changeStatus(id,status){
-
-    let orders =
-        getOrders();
-
-
-    const order =
-        orders.find(
+    const product =
+        products.find(
             item =>
             Number(item.id) === Number(id)
         );
 
 
-    if(order){
+    if(!product){
 
-        order.status =
-            status;
-
-        localStorage.setItem(
-            "orders",
-            JSON.stringify(orders)
-        );
-
-        loadData();
-
-    }
-
-}
-
-
-/* ===================================
-   DELETE ONE ORDER
-=================================== */
-
-function deleteOrder(id){
-
-    if(!confirm(
-        "এই অর্ডারটি মুছে ফেলবেন?"
-    )){
+        alert("পণ্য পাওয়া যায়নি।");
 
         return;
 
     }
 
 
-    let orders =
-        getOrders();
+    if(Number(product.stock) <= 0){
+
+        alert("এই পণ্যটি বর্তমানে স্টকে নেই।");
+
+        return;
+
+    }
 
 
-    orders =
-        orders.filter(
-            order =>
-            Number(order.id) !== Number(id)
-        );
+    /* নির্বাচিত পণ্যের তথ্য */
+
+    localStorage.setItem(
+        "selectedProduct",
+        product.name
+    );
 
 
     localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
+        "selectedPrice",
+        product.price
     );
 
 
-    loadData();
+    localStorage.setItem(
+        "selectedProductId",
+        product.id
+    );
+
+
+    /* অর্ডার পেজ */
+
+    window.location.href =
+        "orders.html";
 
 }
 
 
-/* ===================================
-   DELETE ALL ORDERS
-=================================== */
+/* =========================================
+   নিরাপদভাবে লেখা
+========================================= */
 
-function deleteAllOrders(){
+function escapeHTML(value){
 
-    const orders =
-        getOrders();
-
-
-    if(orders.length === 0){
-
-        alert("মুছে ফেলার মতো কোনো অর্ডার নেই।");
-
-        return;
-
-    }
-
-
-    if(!confirm(
-        "সব অর্ডার স্থায়ীভাবে মুছে ফেলবেন?"
-    )){
-
-        return;
-
-    }
-
-
-    localStorage.removeItem(
-        "orders"
-    );
-
-
-    loadData();
-
-}
-
-
-/* ===================================
-   DELETE ALL MESSAGES
-=================================== */
-
-function deleteAllMessages(){
-
-    const messages =
-        getMessages();
-
-
-    if(messages.length === 0){
-
-        alert("মুছে ফেলার মতো কোনো মেসেজ নেই।");
-
-        return;
-
-    }
-
-
-    if(!confirm(
-        "সব মেসেজ স্থায়ীভাবে মুছে ফেলবেন?"
-    )){
-
-        return;
-
-    }
-
-
-    localStorage.removeItem(
-        "messages"
-    );
-
-
-    loadData();
-
-}
-
-
-/* ===================================
-   SAFE TEXT
-=================================== */
-
-function safe(value){
-
-    if(value === undefined ||
-       value === null){
-
-        return "";
-
-    }
-
-
-    return String(value)
+    return String(value ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -972,14 +457,13 @@ function safe(value){
 }
 
 
-/* ===================================
-   START
-=================================== */
+/* =========================================
+   শুরু
+========================================= */
 
-loadData();
+loadProducts();
 
 </script>
-
 
 </body>
 </html>
