@@ -7,6 +7,7 @@
 <title>NOON.BD Admin Panel</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -89,6 +90,11 @@ button{
     color:white;
 }
 
+.confirm{
+    background:#168a3b;
+    color:white;
+}
+
 .product,
 .order{
     background:#fafafa;
@@ -101,6 +107,26 @@ button{
 .product h3,
 .order h3{
     margin-top:0;
+}
+
+.order{
+    border-left:5px solid #111827;
+}
+
+.order-items{
+    background:white;
+    border-radius:8px;
+    padding:12px;
+    margin:12px 0;
+}
+
+.order-item{
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+}
+
+.order-item:last-child{
+    border-bottom:0;
 }
 
 .order-status{
@@ -116,6 +142,26 @@ button{
 .status-label{
     font-weight:bold;
     margin-top:10px;
+}
+
+.total-box{
+    background:#eef7f0;
+    border-radius:8px;
+    padding:12px;
+    margin-top:12px;
+}
+
+.total{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.payment-box{
+    background:#fff8e8;
+    border:1px solid #f0d58a;
+    padding:12px;
+    border-radius:8px;
+    margin-top:12px;
 }
 
 .empty{
@@ -153,89 +199,129 @@ footer p{
     button{
         padding:9px 11px;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
-    <h1>🔐 NOON.BD</h1>
-    <p>Admin Panel</p>
+
+<h1>🔐 NOON.BD</h1>
+
+<p>Admin Panel</p>
+
 </header>
 
+
 <nav>
-    <a href="index.html">🏠 হোম</a>
-    <a href="services.html">🛠️ সেবা</a>
-    <a href="products.html">🛍️ পণ্য</a>
-    <a href="orders.html">📦 অর্ডার</a>
-    <a href="delivery.html">🚚 ডেলিভারি</a>
-    <a href="contact.html">📞 যোগাযোগ</a>
+
+<a href="index.html">🏠 হোম</a>
+
+<a href="services.html">🛠️ সেবা</a>
+
+<a href="products.html">🛍️ পণ্য</a>
+
+<a href="orders.html">📦 অর্ডার</a>
+
+<a href="delivery.html">🚚 ডেলিভারি</a>
+
+<a href="contact.html">📞 যোগাযোগ</a>
+
 </nav>
+
 
 <div class="container">
 
-<!-- ================= PRODUCT ================= -->
+
+<!-- ================= PRODUCTS ================= -->
 
 <div class="box">
 
-    <h2>🛍️ পণ্য ব্যবস্থাপনা</h2>
+<h2>🛍️ পণ্য ব্যবস্থাপনা</h2>
 
-    <button
-        class="add"
-        onclick="addProduct()">
-        ➕ নতুন পণ্য
-    </button>
+<button
+class="add"
+onclick="addProduct()">
 
-    <div id="products">
-        <div class="empty">
-            পণ্য লোড হচ্ছে...
-        </div>
-    </div>
+➕ নতুন পণ্য
+
+</button>
+
+<div id="products">
+
+<div class="empty">
+পণ্য লোড হচ্ছে...
+</div>
 
 </div>
+
+</div>
+
 
 
 <!-- ================= ORDERS ================= -->
 
 <div class="box">
 
-    <h2>📦 অর্ডার ব্যবস্থাপনা</h2>
+<h2>📦 অর্ডার ব্যবস্থাপনা</h2>
 
-    <div id="orders">
-        <div class="empty">
-            অর্ডার লোড হচ্ছে...
-        </div>
-    </div>
+<div id="orders">
+
+<div class="empty">
+অর্ডার লোড হচ্ছে...
+</div>
 
 </div>
+
+</div>
+
 
 
 <!-- ================= MESSAGES ================= -->
 
 <div class="box">
 
-    <h2>💬 মেসেজ</h2>
+<h2>💬 মেসেজ</h2>
 
-    <div id="messages">
-        <div class="empty">
-            মেসেজ লোড হচ্ছে...
-        </div>
-    </div>
+<div id="messages">
+
+<div class="empty">
+মেসেজ লোড হচ্ছে...
+</div>
 
 </div>
+
+</div>
+
 
 </div>
 
 
 <footer>
-    <p><strong>NOON.BD</strong></p>
-    <p>Admin Panel</p>
-    <p>© 2026 NOON.BD</p>
+
+<p>
+<strong>NOON.BD</strong>
+</p>
+
+<p>
+Admin Panel
+</p>
+
+<p>
+© 2026 NOON.BD
+</p>
+
 </footer>
 
 
+
 <script>
+
 
 /* ==========================================
    DEFAULT PRODUCTS
@@ -243,73 +329,80 @@ footer p{
 
 const defaultProducts = [
 
-    {
-        id:1,
-        name:"স্মার্টফোন",
-        price:15000,
-        stock:10,
-        icon:"📱"
-    },
+{
+id:1,
+name:"স্মার্টফোন",
+price:15000,
+stock:10,
+icon:"📱"
+},
 
-    {
-        id:2,
-        name:"হেডফোন",
-        price:1200,
-        stock:15,
-        icon:"🎧"
-    },
+{
+id:2,
+name:"হেডফোন",
+price:1200,
+stock:15,
+icon:"🎧"
+},
 
-    {
-        id:3,
-        name:"স্মার্ট ওয়াচ",
-        price:2500,
-        stock:8,
-        icon:"⌚"
-    }
+{
+id:3,
+name:"স্মার্ট ওয়াচ",
+price:2500,
+stock:8,
+icon:"⌚"
+}
 
 ];
 
 
+
 /* ==========================================
-   PRODUCTS
+   GET PRODUCTS
 ========================================== */
 
 function getProducts(){
 
-    try{
+try{
 
-        const data =
-            localStorage.getItem("noonProducts");
+const data =
+localStorage.getItem("noonProducts");
 
-        if(!data){
+if(!data){
 
-            localStorage.setItem(
-                "noonProducts",
-                JSON.stringify(defaultProducts)
-            );
+localStorage.setItem(
+"noonProducts",
+JSON.stringify(defaultProducts)
+);
 
-            return defaultProducts;
-        }
+return defaultProducts;
 
-        const products =
-            JSON.parse(data);
-
-        if(!Array.isArray(products)){
-            throw new Error("Invalid products");
-        }
-
-        return products;
-
-    }catch(error){
-
-        localStorage.setItem(
-            "noonProducts",
-            JSON.stringify(defaultProducts)
-        );
-
-        return defaultProducts;
-    }
 }
+
+const products =
+JSON.parse(data);
+
+if(!Array.isArray(products)){
+
+throw new Error("Invalid products");
+
+}
+
+return products;
+
+}catch(error){
+
+localStorage.setItem(
+"noonProducts",
+JSON.stringify(defaultProducts)
+);
+
+return defaultProducts;
+
+}
+
+}
+
 
 
 /* ==========================================
@@ -318,59 +411,86 @@ function getProducts(){
 
 function loadProducts(){
 
-    const products = getProducts();
+const products =
+getProducts();
 
-    const box = document.getElementById("products");
+const box =
+document.getElementById("products");
 
-    if(!products.length){
 
-        box.innerHTML =
-            '<div class="empty">কোনো পণ্য নেই।</div>';
+if(!products.length){
 
-        return;
-    }
+box.innerHTML =
+'<div class="empty">কোনো পণ্য নেই।</div>';
 
-    box.innerHTML =
-        products.map(function(product){
-
-            return `
-
-            <div class="product">
-
-                <h3>
-                    ${product.icon || "🛍️"}
-                    ${escapeText(product.name)}
-                </h3>
-
-                <p>
-                    💰 দাম:
-                    ৳${Number(product.price || 0).toLocaleString("bn-BD")}
-                </p>
-
-                <p>
-                    📦 স্টক:
-                    ${Number(product.stock || 0)}
-                </p>
-
-                <button
-                    class="edit"
-                    onclick="editProduct(${product.id})">
-                    ✏️ Edit
-                </button>
-
-                <button
-                    class="delete"
-                    onclick="deleteProduct(${product.id})">
-                    🗑️ Delete
-                </button>
-
-            </div>
-
-            `;
-
-        }).join("");
+return;
 
 }
+
+
+box.innerHTML =
+products.map(function(product){
+
+return `
+
+<div class="product">
+
+<h3>
+
+${product.icon || "🛍️"}
+
+${escapeText(product.name)}
+
+</h3>
+
+
+<p>
+
+💰 দাম:
+
+৳${Number(
+product.price || 0
+).toLocaleString("bn-BD")}
+
+</p>
+
+
+<p>
+
+📦 স্টক:
+
+${Number(
+product.stock || 0
+)}
+
+</p>
+
+
+<button
+class="edit"
+onclick="editProduct(${product.id})">
+
+✏️ Edit
+
+</button>
+
+
+<button
+class="delete"
+onclick="deleteProduct(${product.id})">
+
+🗑️ Delete
+
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
 
 
 /* ==========================================
@@ -379,59 +499,86 @@ function loadProducts(){
 
 function addProduct(){
 
-    const name =
-        prompt("পণ্যের নাম লিখুন:");
+const name =
+prompt(
+"পণ্যের নাম লিখুন:"
+);
 
-    if(name === null || name.trim() === ""){
-        return;
-    }
+if(
+name === null ||
+name.trim() === ""
+){
 
-    const price =
-        prompt("পণ্যের দাম লিখুন:");
+return;
 
-    if(price === null){
-        return;
-    }
-
-    const stock =
-        prompt("স্টক সংখ্যা লিখুন:");
-
-    if(stock === null){
-        return;
-    }
-
-    const icon =
-        prompt(
-            "পণ্যের Emoji দিন:",
-            "🛍️"
-        ) || "🛍️";
-
-    const products =
-        getProducts();
-
-    products.push({
-
-        id:Date.now(),
-
-        name:name.trim(),
-
-        price:Number(price) || 0,
-
-        stock:Number(stock) || 0,
-
-        icon:icon
-
-    });
-
-    localStorage.setItem(
-        "noonProducts",
-        JSON.stringify(products)
-    );
-
-    loadProducts();
-
-    alert("✅ পণ্য যোগ হয়েছে।");
 }
+
+
+const price =
+prompt(
+"পণ্যের দাম লিখুন:"
+);
+
+if(price === null){
+
+return;
+
+}
+
+
+const stock =
+prompt(
+"স্টক সংখ্যা লিখুন:"
+);
+
+if(stock === null){
+
+return;
+
+}
+
+
+const icon =
+prompt(
+"পণ্যের Emoji দিন:",
+"🛍️"
+) || "🛍️";
+
+
+const products =
+getProducts();
+
+
+products.push({
+
+id:Date.now(),
+
+name:name.trim(),
+
+price:Number(price) || 0,
+
+stock:Number(stock) || 0,
+
+icon:icon
+
+});
+
+
+localStorage.setItem(
+"noonProducts",
+JSON.stringify(products)
+);
+
+
+loadProducts();
+
+
+alert(
+"✅ পণ্য যোগ হয়েছে।"
+);
+
+}
+
 
 
 /* ==========================================
@@ -440,71 +587,95 @@ function addProduct(){
 
 function editProduct(id){
 
-    const products =
-        getProducts();
+const products =
+getProducts();
 
-    const product =
-        products.find(function(item){
 
-            return Number(item.id) === Number(id);
+const product =
+products.find(function(item){
 
-        });
+return Number(item.id)
+===
+Number(id);
 
-    if(!product){
+});
 
-        alert("❌ পণ্য পাওয়া যায়নি।");
 
-        return;
-    }
+if(!product){
 
-    const name =
-        prompt(
-            "পণ্যের নাম:",
-            product.name
-        );
+alert(
+"❌ পণ্য পাওয়া যায়নি।"
+);
 
-    if(name === null){
-        return;
-    }
+return;
 
-    const price =
-        prompt(
-            "পণ্যের দাম:",
-            product.price
-        );
-
-    if(price === null){
-        return;
-    }
-
-    const stock =
-        prompt(
-            "স্টক:",
-            product.stock
-        );
-
-    if(stock === null){
-        return;
-    }
-
-    product.name =
-        name.trim();
-
-    product.price =
-        Number(price) || 0;
-
-    product.stock =
-        Number(stock) || 0;
-
-    localStorage.setItem(
-        "noonProducts",
-        JSON.stringify(products)
-    );
-
-    loadProducts();
-
-    alert("✅ পণ্য আপডেট হয়েছে।");
 }
+
+
+const name =
+prompt(
+"পণ্যের নাম:",
+product.name
+);
+
+if(name === null){
+
+return;
+
+}
+
+
+const price =
+prompt(
+"পণ্যের দাম:",
+product.price
+);
+
+if(price === null){
+
+return;
+
+}
+
+
+const stock =
+prompt(
+"স্টক:",
+product.stock
+);
+
+if(stock === null){
+
+return;
+
+}
+
+
+product.name =
+name.trim();
+
+product.price =
+Number(price) || 0;
+
+product.stock =
+Number(stock) || 0;
+
+
+localStorage.setItem(
+"noonProducts",
+JSON.stringify(products)
+);
+
+
+loadProducts();
+
+
+alert(
+"✅ পণ্য আপডেট হয়েছে।"
+);
+
+}
+
 
 
 /* ==========================================
@@ -513,66 +684,86 @@ function editProduct(id){
 
 function deleteProduct(id){
 
-    const ok =
-        confirm(
-            "এই পণ্যটি মুছে ফেলবেন?"
-        );
+const ok =
+confirm(
+"এই পণ্যটি মুছে ফেলবেন?"
+);
 
-    if(!ok){
-        return;
-    }
 
-    let products =
-        getProducts();
+if(!ok){
 
-    products =
-        products.filter(function(product){
+return;
 
-            return Number(product.id)
-                !== Number(id);
-
-        });
-
-    localStorage.setItem(
-        "noonProducts",
-        JSON.stringify(products)
-    );
-
-    loadProducts();
-
-    alert("✅ পণ্য মুছে ফেলা হয়েছে।");
 }
 
 
+let products =
+getProducts();
+
+
+products =
+products.filter(function(product){
+
+return Number(product.id)
+!==
+Number(id);
+
+});
+
+
+localStorage.setItem(
+"noonProducts",
+JSON.stringify(products)
+);
+
+
+loadProducts();
+
+
+alert(
+"✅ পণ্য মুছে ফেলা হয়েছে।"
+);
+
+}
+
+
+
 /* ==========================================
-   ORDERS
+   GET ORDERS
 ========================================== */
 
 function getOrders(){
 
-    try{
+try{
 
-        const data =
-            localStorage.getItem("orders");
+const data =
+localStorage.getItem("noonOrders");
 
-        if(!data){
-            return [];
-        }
 
-        const orders =
-            JSON.parse(data);
+if(!data){
 
-        return Array.isArray(orders)
-            ? orders
-            : [];
-
-    }catch(error){
-
-        return [];
-
-    }
+return [];
 
 }
+
+
+const orders =
+JSON.parse(data);
+
+
+return Array.isArray(orders)
+? orders
+: [];
+
+
+}catch(error){
+
+return [];
+
+}
+
+}
+
 
 
 /* ==========================================
@@ -581,23 +772,13 @@ function getOrders(){
 
 function saveOrders(orders){
 
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-    );
+localStorage.setItem(
+"noonOrders",
+JSON.stringify(orders)
+);
 
 }
 
-
-/* ==========================================
-   ORDER STATUS
-========================================== */
-
-function getStatus(order){
-
-    return order.status || "Pending";
-
-}
 
 
 /* ==========================================
@@ -606,145 +787,421 @@ function getStatus(order){
 
 function loadOrders(){
 
-    const orders =
-        getOrders();
+const orders =
+getOrders();
 
-    const box =
-        document.getElementById("orders");
 
-    if(!orders.length){
+const box =
+document.getElementById("orders");
 
-        box.innerHTML =
-            '<div class="empty">📦 এখনো কোনো অর্ডার নেই।</div>';
 
-        return;
-    }
+if(!orders.length){
 
-    box.innerHTML =
-        orders.map(function(order,index){
+box.innerHTML = `
 
-            return `
+<div class="empty">
 
-            <div class="order">
+📦 এখনো কোনো অর্ডার নেই।
 
-                <h3>
-                    📦 অর্ডার #${index + 1}
-                </h3>
+<br><br>
 
-                <p>
-                    🛍️ পণ্য:
-                    ${escapeText(order.product || "—")}
-                </p>
+কাস্টমার অর্ডার করলে এখানে দেখা যাবে।
 
-                <p>
-                    💰 মূল্য:
-                    ৳${escapeText(order.price || order.total || "0")}
-                </p>
+</div>
 
-                <p>
-                    👤 নাম:
-                    ${escapeText(order.name || "—")}
-                </p>
+`;
 
-                <p>
-                    📞 মোবাইল:
-                    ${escapeText(order.phone || order.mobile || "—")}
-                </p>
-
-                <p>
-                    📍 ঠিকানা:
-                    ${escapeText(order.address || "—")}
-                </p>
-
-                <p>
-                    💳 পেমেন্ট:
-                    ${escapeText(order.payment || "—")}
-                </p>
-
-                <p>
-                    📅 সময়:
-                    ${escapeText(order.date || order.time || "—")}
-                </p>
-
-                <p class="status-label">
-                    📌 অর্ডার স্ট্যাটাস
-                </p>
-
-                <select
-                    class="order-status"
-                    onchange="changeOrderStatus(${index}, this.value)">
-
-                    <option
-                        value="Pending"
-                        ${getStatus(order)==="Pending" ? "selected" : ""}>
-                        🟡 Pending
-                    </option>
-
-                    <option
-                        value="Confirmed"
-                        ${getStatus(order)==="Confirmed" ? "selected" : ""}>
-                        🟢 Confirmed
-                    </option>
-
-                    <option
-                        value="Delivered"
-                        ${getStatus(order)==="Delivered" ? "selected" : ""}>
-                        🚚 Delivered
-                    </option>
-
-                    <option
-                        value="Cancelled"
-                        ${getStatus(order)==="Cancelled" ? "selected" : ""}>
-                        🔴 Cancelled
-                    </option>
-
-                </select>
-
-                <button
-                    class="edit"
-                    onclick="editOrder(${index})">
-                    ✏️ Edit
-                </button>
-
-                <button
-                    class="delete"
-                    onclick="deleteOrder(${index})">
-                    🗑️ Delete
-                </button>
-
-            </div>
-
-            `;
-
-        }).join("");
+return;
 
 }
+
+
+box.innerHTML =
+orders
+.slice()
+.reverse()
+.map(function(order,index){
+
+const realIndex =
+orders.length - 1 - index;
+
+
+const items =
+Array.isArray(order.items)
+? order.items
+: [];
+
+
+const productTotal =
+Number(
+order.productTotal || 0
+);
+
+
+const deliveryCharge =
+Number(
+order.deliveryCharge || 150
+);
+
+
+const grandTotal =
+Number(
+order.total ||
+(productTotal + deliveryCharge)
+);
+
+
+return `
+
+<div class="order">
+
+
+<h3>
+
+📦 অর্ডার #${escapeText(
+String(order.id || realIndex + 1)
+)}
+
+</h3>
+
+
+<p>
+
+📅 সময়:
+
+${escapeText(
+order.date || "—"
+)}
+
+</p>
+
+
+
+<h4>
+👤 কাস্টমারের তথ্য
+</h4>
+
+
+<p>
+
+<strong>নাম:</strong>
+
+${escapeText(
+order.name || "—"
+)}
+
+</p>
+
+
+<p>
+
+<strong>📞 মোবাইল:</strong>
+
+${escapeText(
+order.phone || "—"
+)}
+
+</p>
+
+
+<p>
+
+<strong>📍 ঠিকানা:</strong>
+
+${escapeText(
+order.address || "—"
+)}
+
+</p>
+
+
+
+<h4>
+🛍️ অর্ডার করা পণ্য
+</h4>
+
+
+<div class="order-items">
+
+
+${
+items.length
+
+?
+
+items.map(function(item){
+
+return `
+
+<div class="order-item">
+
+<strong>
+${escapeText(
+item.name || "পণ্য"
+)}
+</strong>
+
+<br>
+
+৳${Number(
+item.price || 0
+).toLocaleString("bn-BD")}
+
+×
+
+${Number(
+item.quantity || 1
+)}
+
+=
+
+৳${(
+Number(item.price || 0) *
+Number(item.quantity || 1)
+).toLocaleString("bn-BD")}
+
+</div>
+
+`;
+
+}).join("")
+
+:
+
+`<div>
+পুরোনো অর্ডার ফরম্যাট
+</div>`
+
+}
+
+
+</div>
+
+
+
+<div class="payment-box">
+
+<h4>
+💳 পেমেন্ট তথ্য
+</h4>
+
+
+<p>
+
+পদ্ধতি:
+
+<strong>
+${escapeText(
+order.paymentMethod || "—"
+)}
+</strong>
+
+</p>
+
+
+<p>
+
+পেমেন্ট নম্বর:
+
+<strong>
+${escapeText(
+order.paymentNumber || "—"
+)}
+</strong>
+
+</p>
+
+
+<p>
+
+Transaction ID:
+
+<strong>
+${escapeText(
+order.transactionId || "—"
+)}
+</strong>
+
+</p>
+
+
+<p>
+
+ডেলিভারি চার্জ:
+
+<strong>
+৳${deliveryCharge.toLocaleString("bn-BD")}
+</strong>
+
+</p>
+
+</div>
+
+
+
+<div class="total-box">
+
+<p>
+
+পণ্যের মোট:
+
+৳${productTotal.toLocaleString("bn-BD")}
+
+</p>
+
+
+<p>
+
+🚚 ডেলিভারি:
+
+৳${deliveryCharge.toLocaleString("bn-BD")}
+
+</p>
+
+
+<p class="total">
+
+💰 সর্বমোট:
+
+৳${grandTotal.toLocaleString("bn-BD")}
+
+</p>
+
+</div>
+
+
+
+<p class="status-label">
+
+📌 অর্ডার স্ট্যাটাস
+
+</p>
+
+
+<select
+class="order-status"
+onchange="changeOrderStatus(${realIndex},this.value)"
+>
+
+<option
+value="Pending"
+${getStatus(order)==="Pending"
+? "selected"
+: ""}>
+
+🟡 Pending
+
+</option>
+
+
+<option
+value="Confirmed"
+${getStatus(order)==="Confirmed"
+? "selected"
+: ""}>
+
+🟢 Confirmed
+
+</option>
+
+
+<option
+value="Delivered"
+${getStatus(order)==="Delivered"
+? "selected"
+: ""}>
+
+🚚 Delivered
+
+</option>
+
+
+<option
+value="Cancelled"
+${getStatus(order)==="Cancelled"
+? "selected"
+: ""}>
+
+🔴 Cancelled
+
+</option>
+
+</select>
+
+
+
+<button
+class="edit"
+onclick="editOrder(${realIndex})">
+
+✏️ Edit
+
+</button>
+
+
+<button
+class="delete"
+onclick="deleteOrder(${realIndex})">
+
+🗑️ Delete
+
+</button>
+
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
 
 
 /* ==========================================
-   CHANGE ORDER STATUS
+   GET STATUS
 ========================================== */
 
-function changeOrderStatus(index,status){
+function getStatus(order){
 
-    const orders =
-        getOrders();
+return order.status || "Pending";
 
-    if(!orders[index]){
-        return;
-    }
-
-    orders[index].status =
-        status;
-
-    saveOrders(orders);
-
-    loadOrders();
-
-    alert(
-        "✅ অর্ডারের স্ট্যাটাস পরিবর্তন হয়েছে।"
-    );
 }
+
+
+
+/* ==========================================
+   CHANGE STATUS
+========================================== */
+
+function changeOrderStatus(
+index,
+status
+){
+
+const orders =
+getOrders();
+
+
+if(!orders[index]){
+
+return;
+
+}
+
+
+orders[index].status =
+status;
+
+
+saveOrders(orders);
+
+
+loadOrders();
+
+
+}
+
 
 
 /* ==========================================
@@ -753,69 +1210,86 @@ function changeOrderStatus(index,status){
 
 function editOrder(index){
 
-    const orders =
-        getOrders();
-
-    const order =
-        orders[index];
-
-    if(!order){
-
-        alert("❌ অর্ডার পাওয়া যায়নি।");
-
-        return;
-    }
+const orders =
+getOrders();
 
 
-    const name =
-        prompt(
-            "👤 কাস্টমারের নাম:",
-            order.name || ""
-        );
-
-    if(name === null){
-        return;
-    }
+const order =
+orders[index];
 
 
-    const phone =
-        prompt(
-            "📞 মোবাইল নম্বর:",
-            order.phone || order.mobile || ""
-        );
+if(!order){
 
-    if(phone === null){
-        return;
-    }
+alert(
+"❌ অর্ডার পাওয়া যায়নি।"
+);
 
+return;
 
-    const address =
-        prompt(
-            "📍 ঠিকানা:",
-            order.address || ""
-        );
-
-    if(address === null){
-        return;
-    }
-
-
-    order.name =
-        name.trim();
-
-    order.phone =
-        phone.trim();
-
-    order.address =
-        address.trim();
-
-
-    saveOrders(orders);
-
-    loadOrders();
-
-    alert("✅ অর্ডার আপডেট হয়েছে।");
 }
+
+
+const name =
+prompt(
+"👤 কাস্টমারের নাম:",
+order.name || ""
+);
+
+if(name === null){
+
+return;
+
+}
+
+
+const phone =
+prompt(
+"📞 মোবাইল নম্বর:",
+order.phone || ""
+);
+
+if(phone === null){
+
+return;
+
+}
+
+
+const address =
+prompt(
+"📍 ঠিকানা:",
+order.address || ""
+);
+
+if(address === null){
+
+return;
+
+}
+
+
+order.name =
+name.trim();
+
+order.phone =
+phone.trim();
+
+order.address =
+address.trim();
+
+
+saveOrders(orders);
+
+
+loadOrders();
+
+
+alert(
+"✅ অর্ডার আপডেট হয়েছে।"
+);
+
+}
+
 
 
 /* ==========================================
@@ -824,65 +1298,79 @@ function editOrder(index){
 
 function deleteOrder(index){
 
-    const ok =
-        confirm(
-            "⚠️ এই অর্ডারটি স্থায়ীভাবে মুছে ফেলবেন?"
-        );
-
-    if(!ok){
-        return;
-    }
+const ok =
+confirm(
+"⚠️ এই অর্ডারটি স্থায়ীভাবে মুছে ফেলবেন?"
+);
 
 
-    const orders =
-        getOrders();
+if(!ok){
 
+return;
 
-    orders.splice(
-        index,
-        1
-    );
-
-
-    saveOrders(orders);
-
-    loadOrders();
-
-    alert(
-        "✅ অর্ডার মুছে ফেলা হয়েছে।"
-    );
 }
 
 
+const orders =
+getOrders();
+
+
+orders.splice(
+index,
+1
+);
+
+
+saveOrders(orders);
+
+
+loadOrders();
+
+
+alert(
+"✅ অর্ডার মুছে ফেলা হয়েছে।"
+);
+
+}
+
+
+
 /* ==========================================
-   MESSAGES
+   GET MESSAGES
 ========================================== */
 
 function getMessages(){
 
-    try{
+try{
 
-        const data =
-            localStorage.getItem("messages");
+const data =
+localStorage.getItem("messages");
 
-        if(!data){
-            return [];
-        }
 
-        const messages =
-            JSON.parse(data);
+if(!data){
 
-        return Array.isArray(messages)
-            ? messages
-            : [];
-
-    }catch(error){
-
-        return [];
-
-    }
+return [];
 
 }
+
+
+const messages =
+JSON.parse(data);
+
+
+return Array.isArray(messages)
+? messages
+: [];
+
+
+}catch(error){
+
+return [];
+
+}
+
+}
+
 
 
 /* ==========================================
@@ -891,81 +1379,126 @@ function getMessages(){
 
 function loadMessages(){
 
-    const messages =
-        getMessages();
+const messages =
+getMessages();
 
-    const box =
-        document.getElementById("messages");
 
-    if(!messages.length){
+const box =
+document.getElementById(
+"messages"
+);
 
-        box.innerHTML =
-            '<div class="empty">💬 কোনো মেসেজ নেই।</div>';
 
-        return;
-    }
+if(!messages.length){
 
-    box.innerHTML =
-        messages
-        .slice()
-        .reverse()
-        .map(function(message){
+box.innerHTML =
+'<div class="empty">💬 কোনো মেসেজ নেই।</div>';
 
-            return `
-
-            <div class="order">
-
-                <h3>
-                    👤
-                    ${escapeText(
-                        message.name || "নাম নেই"
-                    )}
-                </h3>
-
-                <p>
-                    📞
-                    ${escapeText(
-                        message.phone || "—"
-                    )}
-                </p>
-
-                <p>
-                    💬
-                    ${escapeText(
-                        message.message || "—"
-                    )}
-                </p>
-
-                <p>
-                    📅
-                    ${escapeText(
-                        message.date || "—"
-                    )}
-                </p>
-
-            </div>
-
-            `;
-
-        }).join("");
+return;
 
 }
 
 
+box.innerHTML =
+messages
+.slice()
+.reverse()
+.map(function(message){
+
+return `
+
+<div class="order">
+
+<h3>
+
+👤
+
+${escapeText(
+message.name || "নাম নেই"
+)}
+
+</h3>
+
+
+<p>
+
+📞
+
+${escapeText(
+message.phone || "—"
+)}
+
+</p>
+
+
+<p>
+
+💬
+
+${escapeText(
+message.message || "—"
+)}
+
+</p>
+
+
+<p>
+
+📅
+
+${escapeText(
+message.date || "—"
+)}
+
+</p>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+
 /* ==========================================
-   SECURITY
+   ESCAPE TEXT
 ========================================== */
 
 function escapeText(value){
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+return String(
+value ?? ""
+)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
+
 
 
 /* ==========================================
@@ -973,17 +1506,16 @@ function escapeText(value){
 ========================================== */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+"DOMContentLoaded",
+function(){
 
-        loadProducts();
+loadProducts();
 
-        loadOrders();
+loadOrders();
 
-        loadMessages();
+loadMessages();
 
-    }
-);
+});
 
 </script>
 
