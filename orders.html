@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>NOON.BD — অর্ডার</title>
+<title>NOON.BD - Order</title>
 
 <style>
-
 *{
     box-sizing:border-box;
 }
@@ -19,345 +14,202 @@ content="width=device-width, initial-scale=1.0">
 body{
     margin:0;
     font-family:Arial,"Noto Sans Bengali",sans-serif;
-    background:#f5f7fb;
-    color:#222;
+    background:#f5f5f5;
 }
 
 header{
-    background:#111827;
+    background:#111;
     color:white;
     text-align:center;
-    padding:22px 15px;
+    padding:18px;
 }
 
 header h1{
-    margin:0 0 6px;
+    margin:0;
 }
 
 nav{
-    background:white;
-    padding:10px;
-    text-align:center;
-    box-shadow:0 2px 8px #ddd;
+    margin-top:15px;
 }
 
 nav a{
-    display:inline-block;
-    padding:9px 12px;
-    margin:3px;
-    text-decoration:none;
-    color:#111827;
-    font-weight:bold;
-    border-radius:7px;
-}
-
-nav a:hover,
-nav a.active{
-    background:#111827;
     color:white;
+    text-decoration:none;
+    margin:0 6px;
+    font-size:14px;
 }
 
 .container{
-    max-width:850px;
-    margin:30px auto;
-    padding:15px;
+    max-width:700px;
+    margin:auto;
+    padding:25px 15px;
 }
 
 .box{
     background:white;
-    padding:22px;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
     margin-bottom:20px;
-    border-radius:14px;
-    box-shadow:0 3px 15px #ddd;
 }
 
 h2{
     margin-top:0;
 }
 
-.product-box{
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    padding:18px;
-    border-radius:10px;
-    margin-bottom:20px;
-}
-
-.product-box h3{
-    margin-top:0;
-}
-
-.price{
-    font-size:23px;
-    font-weight:bold;
-    margin-top:10px;
-}
-
 label{
     display:block;
+    margin-top:15px;
+    margin-bottom:6px;
     font-weight:bold;
-    margin:15px 0 6px;
 }
 
 input,
-textarea,
-select{
+textarea{
     width:100%;
     padding:12px;
     border:1px solid #ccc;
-    border-radius:8px;
-    font-size:15px;
-    outline:none;
+    border-radius:7px;
+    font-size:16px;
 }
 
 textarea{
-    min-height:90px;
+    min-height:100px;
     resize:vertical;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:#111827;
+.order-item{
+    padding:10px 0;
+    border-bottom:1px solid #ddd;
 }
 
-.submit{
+.total{
+    text-align:right;
+    font-size:21px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+button{
     width:100%;
     margin-top:20px;
     padding:14px;
     border:0;
     border-radius:8px;
-    background:#111827;
+    background:#168a3b;
     color:white;
-    font-size:16px;
-    font-weight:bold;
+    font-size:17px;
     cursor:pointer;
 }
 
-.submit:hover{
-    background:#2563eb;
+.empty{
+    text-align:center;
+    color:#777;
 }
 
 .success{
     display:none;
-    background:#dcfce7;
-    color:#166534;
-    border:1px solid #86efac;
-    padding:18px;
+    text-align:center;
+    background:#e8f7ed;
+    padding:20px;
     border-radius:10px;
     margin-top:20px;
-    text-align:center;
-}
-
-.error{
-    display:none;
-    background:#fee2e2;
-    color:#991b1b;
-    border:1px solid #fecaca;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:15px;
-}
-
-.no-product{
-    text-align:center;
-    padding:25px;
-    color:#777;
 }
 
 footer{
-    background:#111827;
+    margin-top:30px;
+    background:#111;
     color:white;
     text-align:center;
     padding:25px;
 }
-
-footer p{
-    margin:5px;
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <header>
 
-<h1>📦 NOON.BD</h1>
+<h1>NOON.BD</h1>
 
-<p>অর্ডার করুন</p>
+<p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
+
+<nav>
+<a href="index.html">🏠 হোম</a>
+<a href="products.html">🛍️ পণ্য</a>
+<a href="orders.html">📦 অর্ডার</a>
+<a href="delivery.html">🚚 ডেলিভারি</a>
+<a href="contact.html">📞 যোগাযোগ</a>
+<a href="admin.html">🔐 অ্যাডমিন</a>
+</nav>
 
 </header>
 
 
-<nav>
-
-<a href="index.html">
-🏠 হোম
-</a>
-
-<a href="services.html">
-🛠️ সেবা
-</a>
-
-<a href="products.html">
-🛍️ পণ্য
-</a>
-
-<a href="orders.html"
-class="active">
-📦 অর্ডার
-</a>
-
-<a href="delivery.html">
-🚚 ডেলিভারি
-</a>
-
-<a href="contact.html">
-📞 যোগাযোগ
-</a>
-
-<a href="admin.html">
-🔐 অ্যাডমিন
-</a>
-
-</nav>
-
-
 <div class="container">
-
-
-<!-- ORDER FORM -->
 
 <div class="box">
 
-<h2>🛒 অর্ডার তথ্য</h2>
-
-
-<div id="error"
-class="error">
-</div>
-
-
-<!-- SELECTED PRODUCT -->
-
-<div id="productBox"
-class="product-box">
-
-<h3 id="productName">
-পণ্য নির্বাচন করা হয়নি
-</h3>
-
-<p id="productDescription">
-Products পেজ থেকে একটি পণ্য নির্বাচন করুন।
-</p>
-
-<div id="productPrice"
-class="price">
-৳0
-</div>
-
-</div>
-
+<h2>📦 অর্ডার করুন</h2>
 
 <form id="orderForm">
 
-
-<label>
-আপনার নাম *
-</label>
-
+<label>আপনার নাম</label>
 <input
 type="text"
-id="customerName"
+id="name"
 placeholder="আপনার নাম লিখুন"
 required
 >
 
-
-<label>
-মোবাইল নম্বর *
-</label>
-
+<label>মোবাইল নম্বর</label>
 <input
 type="tel"
-id="customerPhone"
+id="phone"
 placeholder="01XXXXXXXXX"
 required
 >
 
-
-<label>
-ডেলিভারি ঠিকানা *
-</label>
-
+<label>সম্পূর্ণ ঠিকানা</label>
 <textarea
-id="customerAddress"
-placeholder="সম্পূর্ণ ঠিকানা লিখুন"
-required>
-</textarea>
+id="address"
+placeholder="বাড়ি/রোড, এলাকা, থানা, জেলা"
+required
+></textarea>
 
-
-<label>
-পেমেন্ট পদ্ধতি *
-</label>
-
-<select
-id="payment"
-required>
-
-<option value="">
--- নির্বাচন করুন --
-</option>
-
-<option value="Cash on Delivery">
-💵 Cash on Delivery
-</option>
-
-<option value="bKash">
-📱 bKash
-</option>
-
-<option value="Nagad">
-📱 Nagad
-</option>
-
-</select>
-
-
-<button
-type="submit"
-class="submit">
-
+<button type="submit">
 ✅ অর্ডার নিশ্চিত করুন
-
 </button>
-
 
 </form>
 
+</div>
 
-<div
-id="success"
-class="success">
 
-<h3>
-🎉 আপনার অর্ডার গ্রহণ করা হয়েছে!
-</h3>
+<div class="box">
 
-<p>
-আপনার অর্ডারের তথ্য Admin Panel-এ পাঠানো হয়েছে।
-</p>
+<h2>🛒 আপনার অর্ডার</h2>
 
-<p>
-ধন্যবাদ NOON.BD ব্যবহার করার জন্য।
-</p>
+<div id="orderItems"></div>
+
+<div class="total">
+মোট: ৳<span id="orderTotal">0</span>
+</div>
 
 </div>
 
+
+<div id="success" class="success">
+
+<h2>🎉 অর্ডার গ্রহণ করা হয়েছে!</h2>
+
+<p>
+ধন্যবাদ। আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে।
+</p>
+
+<p>
+আমরা আপনার দেওয়া মোবাইল নম্বরে যোগাযোগ করব।
+</p>
 
 </div>
 
@@ -366,378 +218,159 @@ class="success">
 
 <footer>
 
-<p>
-<strong>NOON.BD</strong>
-</p>
+<h3>NOON.BD</h3>
 
-<p>
-আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম
-</p>
+<p>আপনার বিশ্বস্ত অনলাইন প্ল্যাটফর্ম</p>
 
-<p>
-© 2026 NOON.BD
-</p>
+<p>© 2026 NOON.BD — সর্বস্বত্ব সংরক্ষিত</p>
 
 </footer>
 
 
 <script>
 
-
-/* ==========================================
-   SELECTED PRODUCT
-========================================== */
-
-function loadSelectedProduct(){
-
-    const productName =
-        localStorage.getItem(
-            "selectedProduct"
-        );
+let cart =
+JSON.parse(localStorage.getItem("noonCart")) || [];
 
 
-    const productPrice =
-        localStorage.getItem(
-            "selectedPrice"
-        );
+function showOrder(){
+
+const items =
+document.getElementById("orderItems");
+
+const totalElement =
+document.getElementById("orderTotal");
 
 
-    const productId =
-        localStorage.getItem(
-            "selectedProductId"
-        );
+if(cart.length === 0){
 
+items.innerHTML =
+'<p class="empty">আপনার কার্ট খালি।</p>';
 
-    if(
-        !productName ||
-        !productPrice
-    ){
+totalElement.innerText = "0";
 
-        document.getElementById(
-            "productName"
-        ).textContent =
-            "⚠️ কোনো পণ্য নির্বাচন করা হয়নি";
-
-
-        document.getElementById(
-            "productDescription"
-        ).textContent =
-            "প্রথমে Products পেজে গিয়ে একটি পণ্য নির্বাচন করুন।";
-
-
-        document.getElementById(
-            "productPrice"
-        ).textContent =
-            "৳0";
-
-        return;
-    }
-
-
-    document.getElementById(
-        "productName"
-    ).textContent =
-        "🛍️ " + productName;
-
-
-    document.getElementById(
-        "productPrice"
-    ).textContent =
-        "৳" +
-        Number(productPrice)
-        .toLocaleString("en-BD");
-
-
-    document.getElementById(
-        "productDescription"
-    ).textContent =
-        "আপনার নির্বাচিত পণ্য";
+return;
 
 }
 
 
-/* ==========================================
-   ORDER SUBMIT
-========================================== */
+items.innerHTML = cart.map(item => `
 
-document.getElementById(
-    "orderForm"
-).addEventListener(
-    "submit",
-    function(event){
+<div class="order-item">
 
-        event.preventDefault();
+<strong>${item.name}</strong>
 
+<br>
 
-        const product =
-            localStorage.getItem(
-                "selectedProduct"
-            );
+৳${item.price} × ${item.quantity}
 
+=
+৳${item.price * item.quantity}
 
-        const price =
-            localStorage.getItem(
-                "selectedPrice"
-            );
+</div>
 
+`).join("");
 
-        const productId =
-            localStorage.getItem(
-                "selectedProductId"
-            );
 
-
-        const name =
-            document.getElementById(
-                "customerName"
-            ).value.trim();
-
-
-        const phone =
-            document.getElementById(
-                "customerPhone"
-            ).value.trim();
-
-
-        const address =
-            document.getElementById(
-                "customerAddress"
-            ).value.trim();
-
-
-        const payment =
-            document.getElementById(
-                "payment"
-            ).value;
-
-
-        const errorBox =
-            document.getElementById(
-                "error"
-            );
-
-
-        /* CHECK PRODUCT */
-
-        if(
-            !product ||
-            !price
-        ){
-
-            showError(
-                "⚠️ অর্ডার করার জন্য আগে একটি পণ্য নির্বাচন করুন।"
-            );
-
-            return;
-        }
-
-
-        /* CHECK NAME */
-
-        if(!name){
-
-            showError(
-                "আপনার নাম লিখুন।"
-            );
-
-            return;
-        }
-
-
-        /* CHECK PHONE */
-
-        if(!phone){
-
-            showError(
-                "আপনার মোবাইল নম্বর লিখুন।"
-            );
-
-            return;
-        }
-
-
-        /* CHECK ADDRESS */
-
-        if(!address){
-
-            showError(
-                "আপনার ডেলিভারি ঠিকানা লিখুন।"
-            );
-
-            return;
-        }
-
-
-        /* CHECK PAYMENT */
-
-        if(!payment){
-
-            showError(
-                "পেমেন্ট পদ্ধতি নির্বাচন করুন।"
-            );
-
-            return;
-        }
-
-
-        /* ==================================
-           GET OLD ORDERS
-        ================================== */
-
-        let orders = [];
-
-
-        try{
-
-            orders =
-                JSON.parse(
-                    localStorage.getItem(
-                        "orders"
-                    ) || "[]"
-                );
-
-
-            if(!Array.isArray(orders)){
-
-                orders = [];
-
-            }
-
-        }catch(error){
-
-            orders = [];
-
-        }
-
-
-        /* ==================================
-           NEW ORDER
-        ================================== */
-
-        const newOrder = {
-
-            id:Date.now(),
-
-            product:product,
-
-            productId:
-                productId || "",
-
-            price:price,
-
-            name:name,
-
-            phone:phone,
-
-            address:address,
-
-            payment:payment,
-
-            status:"নতুন",
-
-            date:
-                new Date()
-                .toLocaleString("bn-BD")
-
-        };
-
-
-        orders.push(newOrder);
-
-
-        /* ==================================
-           SAVE ORDER
-        ================================== */
-
-        localStorage.setItem(
-            "orders",
-            JSON.stringify(orders)
-        );
-
-
-        /* ==================================
-           SHOW SUCCESS
-        ================================== */
-
-        document.getElementById(
-            "orderForm"
-        ).style.display =
-            "none";
-
-
-        document.getElementById(
-            "productBox"
-        ).style.display =
-            "none";
-
-
-        document.getElementById(
-            "success"
-        ).style.display =
-            "block";
-
-
-        /* ==================================
-           CLEAR SELECTED PRODUCT
-        ================================== */
-
-        localStorage.removeItem(
-            "selectedProduct"
-        );
-
-        localStorage.removeItem(
-            "selectedPrice"
-        );
-
-        localStorage.removeItem(
-            "selectedProductId"
-        );
-
-    }
+const total = cart.reduce(
+(sum,item) =>
+sum + item.price * item.quantity,
+0
 );
 
 
-/* ==========================================
-   ERROR
-========================================== */
-
-function showError(message){
-
-    const box =
-        document.getElementById(
-            "error"
-        );
-
-
-    box.textContent = message;
-
-    box.style.display = "block";
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+totalElement.innerText = total;
 
 }
 
 
-/* ==========================================
-   START
-========================================== */
+document
+.getElementById("orderForm")
+.addEventListener("submit", function(e){
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+e.preventDefault();
 
-        loadSelectedProduct();
 
-    }
+if(cart.length === 0){
+
+alert("আপনার কার্ট খালি।");
+
+return;
+
+}
+
+
+const name =
+document.getElementById("name").value;
+
+const phone =
+document.getElementById("phone").value;
+
+const address =
+document.getElementById("address").value;
+
+
+const total = cart.reduce(
+(sum,item) =>
+sum + item.price * item.quantity,
+0
 );
+
+
+const order = {
+
+id:Date.now(),
+
+name:name,
+
+phone:phone,
+
+address:address,
+
+items:cart,
+
+total:total,
+
+status:"Pending",
+
+date:new Date().toLocaleString("bn-BD")
+
+};
+
+
+let orders =
+JSON.parse(localStorage.getItem("noonOrders")) || [];
+
+
+orders.push(order);
+
+
+localStorage.setItem(
+"noonOrders",
+JSON.stringify(orders)
+);
+
+
+localStorage.removeItem("noonCart");
+
+
+document.getElementById("orderForm").style.display =
+"none";
+
+
+document.getElementById("success").style.display =
+"block";
+
+
+showOrder();
+
+});
+
+
+
+showOrder();
 
 </script>
 
-
 </body>
-
 </html>
